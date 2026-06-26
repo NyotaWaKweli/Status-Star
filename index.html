@@ -1,0 +1,4232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Status Star ✦ Boost Your Views</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ─── RESET & BASE ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg: #000000;
+            --surface: #1C1C1E;
+            --surface-hover: #2C2C2E;
+            --surface-input: #0A0A0A;
+            --border: #38383A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --green: #10B981;
+            --green-hover: #059669;
+            --blue: #34A7F0;
+            --blue-hover: #1E8FD8;
+            --red: #EF4444;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --toast-bg: #1C1C1E;
+            --toast-border: #38383A;
+            --font-brand: 'Patrick Hand', 'Comic Sans MS', cursive;
+            --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            --splash-bg: #000000;
+
+            /* Modal specific - DARK THEME */
+            --modal-text: #FFFFFF;
+            --modal-bg: #1C1C1E;
+            --modal-border: #38383A;
+            --modal-input-bg: #0A0A0A;
+            --modal-input-text: #FFFFFF;
+            --modal-input-border: #38383A;
+            --modal-label: #FFFFFF;
+            --modal-hint: #8E8E93;
+            --modal-placeholder: #6C6C70;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #F2F2F7;
+                --surface: #FFFFFF;
+                --surface-hover: #F0F0F5;
+                --surface-input: #F8F8FC;
+                --border: #E5E5EA;
+                --text-primary: #1C1C1E;
+                --text-secondary: #8E8E93;
+                --shadow: rgba(0, 0, 0, 0.08);
+                --toast-bg: #FFFFFF;
+                --toast-border: #E5E5EA;
+                --splash-bg: #F2F2F7;
+
+                /* Modal specific - LIGHT THEME */
+                --modal-text: #1C1C1E;
+                --modal-bg: #FFFFFF;
+                --modal-border: #E5E5EA;
+                --modal-input-bg: #F2F2F7;
+                --modal-input-text: #1C1C1E;
+                --modal-input-border: #E5E5EA;
+                --modal-label: #1C1C1E;
+                --modal-hint: #8E8E93;
+                --modal-placeholder: #AEAEB2;
+            }
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ─── SPLASH SCREEN ─── */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--splash-bg);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            opacity: 1;
+            transform: scale(1);
+            overflow: hidden;
+        }
+        .splash-screen.hidden {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+
+        .splash-screen .splash-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.15;
+        }
+        .splash-screen .splash-stars .star {
+            position: absolute;
+            font-size: 24px;
+            color: var(--text-primary);
+            animation: float-star 20s ease-in-out infinite;
+            font-family: var(--font-brand);
+        }
+
+        @keyframes float-star {
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+            33% {
+                transform: translateY(-10px) rotate(5deg) scale(1.08);
+            }
+            66% {
+                transform: translateY(10px) rotate(-5deg) scale(0.92);
+            }
+        }
+
+        .splash-screen .splash-content {
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .splash-screen .splash-brand {
+            font-family: var(--font-brand);
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -2px;
+            transform: rotate(-1deg);
+            transition: color 0.3s ease;
+            animation: splash-pulse 2s ease-in-out infinite;
+        }
+        .splash-screen .splash-brand span {
+            color: var(--green);
+            transition: color 0.3s ease;
+        }
+
+        @keyframes splash-pulse {
+            0%,
+            100% {
+                transform: scale(1) rotate(-1deg);
+            }
+            50% {
+                transform: scale(1.04) rotate(-1deg);
+            }
+        }
+
+        .splash-screen .splash-subtitle {
+            font-family: var(--font-brand);
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            transition: color 0.3s ease;
+            animation: splash-fade 3s ease-in-out infinite;
+        }
+
+        @keyframes splash-fade {
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .splash-screen .splash-loader {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin-top: 32px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .splash-screen .splash-loader svg {
+            width: 60px;
+            height: 60px;
+            transform: rotate(-90deg);
+        }
+
+        .splash-screen .splash-loader .loader-circle-bg {
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 3;
+            opacity: 0.3;
+        }
+
+        .splash-screen .splash-loader .loader-circle-progress {
+            fill: none;
+            stroke: var(--green);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 157.08;
+            stroke-dashoffset: 157.08;
+            animation: splash-draw 6s ease-in-out forwards;
+        }
+
+        @keyframes splash-draw {
+            0% {
+                stroke-dashoffset: 157.08;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .splash-screen .splash-loader .loader-star {
+            position: absolute;
+            font-family: var(--font-brand);
+            font-size: 24px;
+            color: var(--green);
+            animation: loader-star-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loader-star-pulse {
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.15) rotate(10deg);
+                opacity: 1;
+            }
+        }
+
+        /* ─── APP CONTAINER ─── */
+        .app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--bg);
+            position: relative;
+            transition: background 0.3s ease;
+            padding: 0 16px 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .app.visible {
+            opacity: 1;
+        }
+
+        /* ─── BACKGROUND STARS ─── */
+        .bg-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+            opacity: 0.10;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .bg-stars .star {
+            position: absolute;
+            font-size: 22px;
+            color: var(--text-primary);
+            animation: float-star 20s ease-in-out infinite;
+            font-family: var(--font-brand);
+        }
+
+        /* ─── SCROLLABLE CONTENT ─── */
+        .scroll-content {
+            flex: 1;
+            padding: 12px 0 8px;
+            position: relative;
+            z-index: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        .scroll-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ─── TOP DECORATIONS ─── */
+        .top-deco {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2px;
+            padding: 0 2px;
+        }
+        .top-deco .scribble-line {
+            height: 5px;
+            background: var(--green);
+            border-radius: 20px;
+            width: 44px;
+            transform: rotate(-2deg);
+            opacity: 0.6;
+            transition: background 0.3s ease;
+        }
+        .top-deco .scribble-line:nth-child(3) {
+            background: var(--blue);
+            width: 30px;
+            transform: rotate(3deg);
+        }
+        .top-deco .doodle-star {
+            font-size: 18px;
+            transform: rotate(-8deg);
+            color: var(--green);
+            opacity: 0.7;
+            font-family: var(--font-brand);
+            transition: color 0.3s ease;
+        }
+
+        /* ─── BRAND HEADER ─── */
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 0 4px;
+            flex-wrap: wrap;
+        }
+        .brand-header h1 {
+            font-family: var(--font-brand);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+            transform: rotate(-1deg);
+            line-height: 1.1;
+            transition: color 0.3s ease;
+        }
+        .brand-header h1 span {
+            color: var(--green);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .brand-header h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--blue);
+            opacity: 0.3;
+            border-radius: 10px;
+            transform: rotate(-2deg);
+            transition: background 0.3s ease;
+        }
+        .brand-badge {
+            background: var(--green);
+            color: #FFFFFF;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 11px;
+            font-family: var(--font-body);
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+            transition: background 0.3s ease;
+        }
+
+        /* ─── HERO ─── */
+        .hero-section {
+            margin: 2px 0 8px;
+        }
+        .hero-section .tagline {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0px;
+            transition: color 0.3s ease;
+        }
+        .hero-section .tagline .icon-star-sm {
+            font-family: var(--font-brand);
+            font-size: 16px;
+            color: var(--green);
+            transition: color 0.3s ease;
+        }
+        .hero-section .main-headline {
+            font-family: var(--font-brand);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            transform: rotate(0.5deg);
+            transition: color 0.3s ease;
+        }
+        .hero-section .main-headline .highlight-wa {
+            color: var(--green);
+            transition: color 0.3s ease;
+        }
+        .hero-section .main-headline .highlight-tg {
+            color: var(--blue);
+            transition: color 0.3s ease;
+        }
+
+        /* ─── LIVE COUNTER ─── */
+        .live-counter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface);
+            padding: 10px 16px;
+            border-radius: 14px;
+            border: 0.5px solid var(--border);
+            margin: 8px 0 14px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .live-counter .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+            flex-shrink: 0;
+            transition: background 0.3s ease;
+        }
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(0.6);
+                opacity: 0.3;
+            }
+        }
+        .live-counter .count {
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .live-counter .label {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .live-counter .trend {
+            margin-left: auto;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--green);
+            background: var(--green)20;
+            padding: 3px 12px;
+            border-radius: 30px;
+            transition: color 0.3s ease, background 0.3s ease;
+        }
+
+        /* ─── DIVIDER ─── */
+        .section-divider {
+            border: none;
+            border-top: 0.5px solid var(--border);
+            margin: 14px 0 16px;
+            opacity: 0.5;
+            transition: border-color 0.3s ease;
+        }
+
+        /* ─── INPUT CARD ─── */
+        .input-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            border: 0.5px solid var(--border);
+            margin: 2px 0 0;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .country-selector {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 0.5px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 12px;
+        }
+        .country-selector:active {
+            transform: scale(0.98);
+            background: var(--surface-hover);
+        }
+        .country-selector .country-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .country-selector .country-flag {
+            font-size: 22px;
+            line-height: 1;
+        }
+        .country-selector .country-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .country-selector .country-code-display {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .country-selector .arrow-down {
+            font-family: var(--font-brand);
+            font-size: 18px;
+            color: var(--text-secondary);
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 2px 4px 2px 14px;
+            border: 0.5px solid var(--border);
+            transition: border-color 0.2s ease, background 0.3s ease;
+            position: relative;
+        }
+        .input-group:focus-within {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px var(--green)20;
+        }
+        .input-group .dial-code {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            transition: color 0.3s ease;
+        }
+        .input-group .validation-indicator {
+            font-family: var(--font-brand);
+            font-size: 18px;
+            color: var(--text-secondary);
+            display: none;
+            transition: color 0.3s ease;
+            flex-shrink: 0;
+            width: 20px;
+            text-align: center;
+        }
+        .input-group .validation-indicator.valid {
+            display: block;
+            color: var(--green);
+        }
+        .input-group .validation-indicator.invalid {
+            display: block;
+            color: var(--red);
+        }
+        .input-group input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 12px 0;
+            background: transparent;
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            min-width: 0;
+            transition: color 0.3s ease;
+        }
+        .input-group input::placeholder {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .input-group input:disabled {
+            opacity: 0.5;
+        }
+        .input-group .clear-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 20px;
+            padding: 0 8px;
+            cursor: pointer;
+            display: none;
+            font-family: var(--font-brand);
+            transition: color 0.3s ease;
+            flex-shrink: 0;
+        }
+        .input-group .clear-btn.visible {
+            display: block;
+        }
+
+        .last-used-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            padding-left: 14px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            display: none;
+        }
+        .last-used-label.visible {
+            display: block;
+        }
+        .last-used-label .icon-edit {
+            font-family: var(--font-brand);
+            font-size: 14px;
+            margin-right: 4px;
+            color: var(--green);
+        }
+
+        /* ─── BUTTONS ─── */
+        .btn-primary {
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--green);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 14px;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn-primary:active {
+            transform: scale(0.97);
+            background: var(--green-hover);
+        }
+        .btn-primary:disabled {
+            opacity: 0.4;
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        .btn-primary .icon-btn {
+            font-family: var(--font-brand);
+            font-size: 22px;
+            line-height: 1;
+            transform: rotate(-2deg);
+        }
+        .btn-primary .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #FFFFFF;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+        .btn-primary.loading .spinner {
+            display: block;
+        }
+        .btn-primary.loading .btn-text {
+            display: none;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ─── RESULT AREA ─── */
+        .result-area {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 18px 16px 16px;
+            margin: 0 0 10px;
+            border: 0.5px solid var(--border);
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+        .result-area .empty-state {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        .result-area .empty-state .icon-star-lg {
+            font-family: var(--font-brand);
+            font-size: 32px;
+            color: var(--green);
+            opacity: 0.25;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .result-area .result-content {
+            width: 100%;
+            display: none;
+        }
+        .result-area .result-content.visible {
+            display: block;
+            animation: slide-up 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes slide-up {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-area .result-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .result-area .result-status .status-icon {
+            font-family: var(--font-brand);
+            font-size: 26px;
+            line-height: 1;
+        }
+        .result-area .result-status .status-icon.found {
+            color: var(--green);
+        }
+        .result-area .result-status .status-icon.not-found {
+            color: var(--red);
+        }
+        .result-area .result-status .status-icon.pending {
+            color: var(--blue);
+        }
+        .result-area .result-status .status-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .result-area .result-number {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .result-area .result-meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+            background: var(--bg);
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin: 6px 0 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: background 0.3s ease, color 0.3s ease;
+            line-height: 1.5;
+        }
+        .result-area .result-meta .meta-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .result-area .result-meta .meta-label {
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .result-area .result-meta .meta-value {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .result-area .result-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .result-area .result-actions .btn-action {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .result-area .result-actions .btn-action:active {
+            transform: scale(0.97);
+        }
+        .result-area .result-actions .btn-action.primary-action {
+            background: var(--green);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+        .result-area .result-actions .btn-action.primary-action:active {
+            background: var(--green-hover);
+        }
+        .result-area .result-actions .btn-action.primary-action:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .result-area .result-actions .btn-action .icon-btn {
+            font-family: var(--font-brand);
+            font-size: 20px;
+            line-height: 1;
+            transform: rotate(-2deg);
+        }
+
+        .result-area .share-section {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 0.5px solid var(--border);
+            transition: border-color 0.3s ease;
+        }
+        .result-area .share-section .share-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+        .result-area .share-section .share-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+        .result-area .share-section .share-buttons .btn-share {
+            padding: 6px 16px;
+            border-radius: 10px;
+            border: 0.5px solid var(--border);
+            background: var(--bg);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .result-area .share-section .share-buttons .btn-share:active {
+            transform: scale(0.95);
+            background: var(--surface-hover);
+        }
+        .result-area .share-section .share-buttons .btn-share.whatsapp {
+            color: var(--green);
+        }
+        .result-area .share-section .share-buttons .btn-share.telegram {
+            color: var(--blue);
+        }
+
+        .result-area .result-tip {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: var(--bg);
+            border-radius: 8px;
+            text-align: center;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .result-area .result-tip .icon-tip {
+            font-family: var(--font-brand);
+            font-size: 14px;
+            color: var(--green);
+            margin-right: 4px;
+        }
+
+        .result-spacer {
+            height: 20px;
+        }
+
+        /* ─── COUNTRY MODAL ─── */
+        .country-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: none;
+            justify-content: flex-end;
+            align-items: flex-end;
+            animation: fade-in 0.3s ease;
+        }
+        .country-modal-overlay.visible {
+            display: flex;
+        }
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .country-modal {
+            background: var(--modal-bg);
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-height: 80vh;
+            max-height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            animation: slide-up-modal 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 0.5px solid var(--modal-border);
+            border-bottom: none;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        @keyframes slide-up-modal {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .country-modal-header {
+            padding: 16px 20px 12px;
+            border-bottom: 0.5px solid var(--modal-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .country-modal-header .modal-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--modal-text);
+            transition: color 0.3s ease;
+        }
+        .country-modal-header .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            font-family: var(--font-brand);
+            padding: 0 4px;
+            transition: color 0.3s ease;
+        }
+
+        .country-modal-search {
+            padding: 8px 16px 12px;
+            flex-shrink: 0;
+        }
+        .country-modal-search input {
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 0.5px solid var(--modal-input-border);
+            background: var(--modal-input-bg);
+            color: var(--modal-input-text);
+            font-size: 15px;
+            font-family: var(--font-body);
+            outline: none;
+            transition: border-color 0.2s ease, background 0.3s ease, color 0.3s ease;
+        }
+        .country-modal-search input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px var(--green)20;
+        }
+        .country-modal-search input::placeholder {
+            color: var(--modal-placeholder);
+        }
+
+        .country-modal-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 8px 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .country-modal-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .country-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .country-item:active {
+            background: var(--surface-hover);
+        }
+        .country-item .country-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .country-item .country-flag {
+            font-size: 22px;
+            line-height: 1;
+        }
+        .country-item .country-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--modal-text);
+            transition: color 0.3s ease;
+        }
+        .country-item .country-dial {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .country-item .country-check {
+            font-family: var(--font-brand);
+            font-size: 18px;
+            color: var(--green);
+            display: none;
+        }
+        .country-item.selected .country-check {
+            display: block;
+        }
+
+        .country-modal .modal-footer {
+            padding: 12px 20px;
+            border-top: 0.5px solid var(--modal-border);
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .country-modal .modal-footer .btn-cancel {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 500;
+            font-family: var(--font-body);
+            cursor: pointer;
+            padding: 8px 20px;
+            transition: color 0.3s ease;
+        }
+        .country-modal .modal-footer .btn-cancel:active {
+            opacity: 0.6;
+        }
+
+        /* ─── VERIFICATION MODAL ─── */
+        .verify-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1100;
+            display: none;
+            justify-content: flex-end;
+            align-items: flex-end;
+            animation: fade-in 0.3s ease;
+        }
+        .verify-modal-overlay.visible {
+            display: flex;
+        }
+
+        .verify-modal {
+            background: var(--modal-bg);
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            padding: 20px 20px 24px;
+            animation: slide-up-modal 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 0.5px solid var(--modal-border);
+            border-bottom: none;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .verify-modal .verify-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 4px;
+            margin: 0 auto 16px;
+        }
+
+        .verify-modal .verify-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--modal-text);
+            text-align: center;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .verify-modal .verify-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--modal-text);
+            text-align: center;
+            padding: 12px 0;
+            font-family: var(--font-brand);
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .verify-modal .verify-hint {
+            font-size: 14px;
+            color: var(--modal-hint);
+            text-align: center;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .verify-modal .verify-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .verify-modal .verify-actions .btn-verify {
+            flex: 1;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .verify-modal .verify-actions .btn-verify:active {
+            transform: scale(0.97);
+        }
+        .verify-modal .verify-actions .btn-verify.edit {
+            background: var(--surface);
+            color: var(--modal-text);
+            border: 0.5px solid var(--modal-border);
+        }
+        .verify-modal .verify-actions .btn-verify.edit:active {
+            background: var(--surface-hover);
+        }
+        .verify-modal .verify-actions .btn-verify.confirm {
+            background: var(--green);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+        .verify-modal .verify-actions .btn-verify.confirm:active {
+            background: var(--green-hover);
+        }
+
+        /* ─── MENU BUTTON ─── */
+        .menu-fab {
+            position: fixed;
+            bottom: 28px;
+            right: 20px;
+            z-index: 200;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 0.5px solid var(--border);
+            color: var(--text-primary);
+            font-size: 26px;
+            font-family: var(--font-brand);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .menu-fab:active {
+            transform: scale(0.92);
+        }
+
+        /* ─── MENU BOTTOM SHEET ─── */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 300;
+            display: none;
+            justify-content: flex-end;
+            align-items: flex-end;
+            animation: fade-in 0.3s ease;
+        }
+        .menu-overlay.visible {
+            display: flex;
+        }
+
+        .menu-sheet {
+            background: var(--modal-bg);
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-height: 80vh;
+            max-height: 80dvh;
+            animation: slide-up-modal 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 0.5px solid var(--modal-border);
+            border-bottom: none;
+            max-width: 480px;
+            margin: 0 auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+            height: 80dvh;
+        }
+
+        .menu-main {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 0;
+        }
+
+        .menu-sheet .menu-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 4px;
+            margin: 12px auto 8px;
+            flex-shrink: 0;
+        }
+
+        .menu-sheet .menu-header {
+            padding: 4px 20px 12px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .menu-sheet .menu-header .menu-title {
+            font-family: var(--font-brand);
+            font-size: 22px;
+            color: var(--modal-text);
+            transition: color 0.3s ease;
+        }
+        .menu-sheet .menu-header .menu-subtitle {
+            font-size: 13px;
+            color: var(--modal-hint);
+            transition: color 0.3s ease;
+        }
+
+        .menu-sheet .menu-list {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 8px 8px;
+            min-height: 0;
+        }
+        .menu-sheet .menu-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+            flex-shrink: 0;
+        }
+        .menu-item:active {
+            background: var(--surface-hover);
+        }
+        .menu-item .menu-icon {
+            font-family: var(--font-brand);
+            font-size: 22px;
+            color: var(--text-secondary);
+            width: 30px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+        .menu-item .menu-text {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--modal-text);
+            transition: color 0.3s ease;
+        }
+        .menu-item .menu-arrow {
+            font-family: var(--font-brand);
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        .menu-sheet .menu-footer {
+            padding: 12px 20px 20px;
+            border-top: 0.5px solid var(--modal-border);
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .menu-sheet .menu-footer .menu-version {
+            font-size: 12px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .menu-sheet .menu-footer .btn-close-menu {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            font-family: var(--font-body);
+            cursor: pointer;
+            padding: 8px 20px;
+            margin-top: 4px;
+            transition: color 0.3s ease;
+        }
+        .menu-sheet .menu-footer .btn-close-menu:active {
+            opacity: 0.6;
+        }
+
+        .menu-page {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            min-height: 0;
+            padding: 0 16px;
+        }
+        .menu-page.visible {
+            display: flex;
+        }
+
+        .menu-page .menu-page-back {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0 12px;
+            cursor: pointer;
+            color: var(--modal-text);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            border-bottom: 0.5px solid var(--modal-border);
+            margin-bottom: 12px;
+            -webkit-tap-highlight-color: transparent;
+            flex-shrink: 0;
+        }
+        .menu-page .menu-page-back:active {
+            opacity: 0.6;
+        }
+        .menu-page .menu-page-back .back-icon {
+            font-family: var(--font-brand);
+            font-size: 22px;
+            color: var(--text-secondary);
+        }
+
+        .menu-page .menu-page-title {
+            font-family: var(--font-brand);
+            font-size: 24px;
+            color: var(--modal-text);
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .menu-page .menu-page-content {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 4px 0 16px;
+            color: var(--modal-text);
+            font-size: 14px;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+            min-height: 0;
+        }
+        .menu-page .menu-page-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .menu-page .menu-page-content .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 0.5px solid var(--modal-border);
+        }
+        .menu-page .menu-page-content .stat-row .stat-label {
+            color: var(--modal-hint);
+        }
+        .menu-page .menu-page-content .stat-row .stat-value {
+            font-weight: 600;
+            color: var(--modal-text);
+        }
+
+        .menu-page .menu-page-content .how-to-step {
+            padding: 10px 0;
+            border-bottom: 0.5px solid var(--modal-border);
+        }
+        .menu-page .menu-page-content .how-to-step .step-number {
+            font-family: var(--font-brand);
+            font-size: 18px;
+            color: var(--green);
+            margin-right: 8px;
+        }
+        .menu-page .menu-page-content .how-to-step .step-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--modal-text);
+        }
+        .menu-page .menu-page-content .how-to-step .step-desc {
+            font-size: 13px;
+            color: var(--modal-hint);
+            margin-top: 2px;
+            padding-left: 28px;
+        }
+
+        .menu-page .menu-page-content .share-buttons-page {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .menu-page .menu-page-content .share-buttons-page .btn-share-page {
+            padding: 14px;
+            border-radius: 12px;
+            border: 0.5px solid var(--modal-border);
+            background: var(--modal-input-bg);
+            color: var(--modal-text);
+            font-size: 15px;
+            font-weight: 500;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .menu-page .menu-page-content .share-buttons-page .btn-share-page:active {
+            transform: scale(0.97);
+            background: var(--surface-hover);
+        }
+        .menu-page .menu-page-content .share-buttons-page .btn-share-page.whatsapp {
+            color: var(--green);
+        }
+        .menu-page .menu-page-content .share-buttons-page .btn-share-page.telegram {
+            color: var(--blue);
+        }
+
+        .menu-page .menu-page-content .faq-item {
+            padding: 10px 0;
+            border-bottom: 0.5px solid var(--modal-border);
+        }
+        .menu-page .menu-page-content .faq-item .faq-q {
+            font-weight: 600;
+            color: var(--modal-text);
+            margin-bottom: 2px;
+        }
+        .menu-page .menu-page-content .faq-item .faq-a {
+            color: var(--modal-hint);
+            font-size: 13px;
+            padding-left: 8px;
+        }
+
+        .menu-page .menu-page-content .notification-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 0.5px solid var(--modal-border);
+        }
+        .menu-page .menu-page-content .notification-toggle .toggle-label {
+            font-size: 15px;
+            color: var(--modal-text);
+        }
+        .menu-page .menu-page-content .notification-toggle .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+        .menu-page .menu-page-content .notification-toggle .toggle-switch.active {
+            background: var(--green);
+        }
+        .menu-page .menu-page-content .notification-toggle .toggle-switch .toggle-knob {
+            width: 18px;
+            height: 18px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s ease;
+        }
+        .menu-page .menu-page-content .notification-toggle .toggle-switch.active .toggle-knob {
+            transform: translateX(20px);
+        }
+
+        .menu-page .menu-page-content .copy-link-area {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .menu-page .menu-page-content .copy-link-area input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 0.5px solid var(--modal-input-border);
+            background: var(--modal-input-bg);
+            color: var(--modal-input-text);
+            font-size: 13px;
+            font-family: var(--font-body);
+            outline: none;
+        }
+        .menu-page .menu-page-content .copy-link-area .btn-copy {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: var(--green);
+            color: #FFFFFF;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .menu-page .menu-page-content .copy-link-area .btn-copy:active {
+            background: var(--green-hover);
+        }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            padding: 16px 0 20px;
+            text-align: center;
+            border-top: 0.5px solid var(--border);
+            background: var(--bg);
+            transition: border-color 0.3s ease, background 0.3s ease;
+            position: relative;
+            z-index: 1;
+            margin-top: 8px;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px 16px;
+            margin-bottom: 8px;
+        }
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+            font-size: 12px;
+            font-weight: 400;
+            font-family: var(--font-body);
+            transition: color 0.2s ease;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .footer-links a:active {
+            opacity: 0.6;
+        }
+        .footer-copyright {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            opacity: 0.6;
+            font-family: var(--font-body);
+            transition: color 0.3s ease;
+        }
+
+        /* ─── TOAST ─── */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--toast-bg);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 14px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            pointer-events: none;
+            border: 0.5px solid var(--toast-border);
+        }
+        .toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ─── RATE LIMIT MODAL ─── */
+        .rate-limit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1200;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fade-in 0.3s ease;
+        }
+        .rate-limit-overlay.visible {
+            display: flex;
+        }
+
+        .rate-limit-modal {
+            background: var(--modal-bg);
+            border-radius: 20px;
+            padding: 28px 24px;
+            max-width: 360px;
+            width: 90%;
+            animation: slide-up-modal 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 0.5px solid var(--modal-border);
+            text-align: center;
+        }
+        .rate-limit-modal .rate-icon {
+            font-family: var(--font-brand);
+            font-size: 48px;
+            color: var(--red);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .rate-limit-modal .rate-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--modal-text);
+            margin-bottom: 6px;
+            transition: color 0.3s ease;
+        }
+        .rate-limit-modal .rate-desc {
+            font-size: 14px;
+            color: var(--modal-hint);
+            line-height: 1.6;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+        .rate-limit-modal .rate-time {
+            font-size: 13px;
+            color: var(--modal-hint);
+            padding: 8px 12px;
+            background: var(--modal-input-bg);
+            border-radius: 10px;
+            margin-bottom: 16px;
+            transition: color 0.3s ease, background 0.3s ease;
+        }
+        .rate-limit-modal .btn-rate-ok {
+            padding: 12px 40px;
+            border: none;
+            border-radius: 14px;
+            background: var(--green);
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .rate-limit-modal .btn-rate-ok:active {
+            transform: scale(0.97);
+            background: var(--green-hover);
+        }
+
+        .footer-sheet {
+            background: var(--modal-bg);
+            border-color: var(--modal-border);
+        }
+        .footer-sheet .footer-sheet-title {
+            color: var(--modal-text);
+        }
+        .footer-sheet .footer-sheet-text {
+            color: var(--modal-text);
+        }
+        .footer-sheet .footer-sheet-hint {
+            color: var(--modal-hint);
+        }
+        .footer-sheet input,
+        .footer-sheet textarea {
+            background: var(--modal-input-bg);
+            color: var(--modal-input-text);
+            border-color: var(--modal-input-border);
+        }
+        .footer-sheet input::placeholder,
+        .footer-sheet textarea::placeholder {
+            color: var(--modal-placeholder);
+        }
+        .footer-sheet label {
+            color: var(--modal-label);
+        }
+
+        /* ─── COOKIE CONSENT BANNER ─── */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-top: 0.5px solid var(--border);
+            padding: 16px 20px;
+            z-index: 500;
+            display: none;
+            animation: slide-up-modal 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .cookie-banner.visible {
+            display: block;
+        }
+        .cookie-banner .cookie-text {
+            font-size: 13px;
+            color: var(--modal-hint);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .cookie-banner .cookie-text strong {
+            color: var(--modal-text);
+        }
+        .cookie-banner .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .cookie-banner .cookie-buttons .btn-cookie {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .cookie-banner .cookie-buttons .btn-cookie:active {
+            transform: scale(0.97);
+        }
+        .cookie-banner .cookie-buttons .btn-cookie.accept {
+            background: var(--green);
+            color: #FFFFFF;
+        }
+        .cookie-banner .cookie-buttons .btn-cookie.decline {
+            background: var(--surface);
+            color: var(--modal-text);
+            border: 0.5px solid var(--modal-border);
+        }
+        .cookie-banner .cookie-buttons .btn-cookie.decline:active {
+            background: var(--surface-hover);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 420px) {
+            .app {
+                padding: 0 12px 0;
+            }
+            .brand-header h1 {
+                font-size: 26px;
+            }
+            .hero-section .main-headline {
+                font-size: 24px;
+            }
+            .input-card {
+                padding: 12px;
+            }
+            .btn-primary {
+                font-size: 15px;
+                padding: 12px 16px;
+            }
+            .result-area {
+                padding: 14px 12px 12px;
+                min-height: 140px;
+            }
+            .result-area .result-status .status-text {
+                font-size: 16px;
+            }
+            .result-area .result-number {
+                font-size: 14px;
+            }
+            .verify-modal .verify-number {
+                font-size: 24px;
+            }
+            .country-item {
+                padding: 10px 14px;
+            }
+            .menu-fab {
+                width: 46px;
+                height: 46px;
+                font-size: 22px;
+                bottom: 22px;
+                right: 16px;
+            }
+            .footer {
+                padding: 12px 0 16px;
+            }
+            .footer-links {
+                gap: 4px 12px;
+            }
+            .footer-links a {
+                font-size: 11px;
+            }
+            .result-spacer {
+                height: 16px;
+            }
+            .splash-screen .splash-brand {
+                font-size: 38px;
+            }
+            .splash-screen .splash-subtitle {
+                font-size: 15px;
+            }
+            .splash-screen .splash-loader {
+                width: 50px;
+                height: 50px;
+            }
+            .splash-screen .splash-loader svg {
+                width: 50px;
+                height: 50px;
+            }
+            .splash-screen .splash-loader .loader-star {
+                font-size: 20px;
+            }
+            .menu-page .menu-page-title {
+                font-size: 20px;
+            }
+            .menu-sheet {
+                height: 85vh;
+                height: 85dvh;
+                max-height: 85vh;
+                max-height: 85dvh;
+            }
+            .cookie-banner {
+                padding: 14px 16px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .app {
+                padding: 0 8px 0;
+            }
+            .brand-header h1 {
+                font-size: 22px;
+            }
+            .hero-section .main-headline {
+                font-size: 20px;
+            }
+            .live-counter .count {
+                font-size: 15px;
+            }
+            .live-counter .label {
+                font-size: 11px;
+            }
+            .country-selector {
+                padding: 10px 14px;
+            }
+            .input-group input {
+                font-size: 14px;
+                padding: 10px 0;
+            }
+            .btn-primary {
+                font-size: 14px;
+                padding: 10px 14px;
+            }
+            .verify-modal .verify-number {
+                font-size: 20px;
+            }
+            .verify-modal .verify-actions .btn-verify {
+                font-size: 14px;
+                padding: 12px;
+            }
+            .result-spacer {
+                height: 12px;
+            }
+            .splash-screen .splash-brand {
+                font-size: 30px;
+            }
+            .splash-screen .splash-loader {
+                width: 44px;
+                height: 44px;
+            }
+            .splash-screen .splash-loader svg {
+                width: 44px;
+                height: 44px;
+            }
+            .splash-screen .splash-loader .loader-star {
+                font-size: 18px;
+            }
+            .menu-page .menu-page-title {
+                font-size: 18px;
+            }
+            .menu-sheet {
+                height: 85vh;
+                height: 85dvh;
+                max-height: 85vh;
+                max-height: 85dvh;
+            }
+            .cookie-banner {
+                padding: 12px 14px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .app {
+                max-width: 520px;
+                border-radius: 20px;
+                margin: 20px auto;
+                padding: 0 20px 0;
+                border: 0.5px solid var(--border);
+                height: calc(100vh - 40px);
+                height: calc(100dvh - 40px);
+            }
+            .bg-stars {
+                max-width: 520px;
+                border-radius: 20px;
+            }
+            .menu-fab {
+                right: calc(50% - 260px + 20px);
+            }
+            .country-modal,
+            .verify-modal,
+            .menu-sheet {
+                max-width: 520px;
+                margin: 0 auto;
+                border-radius: 20px 20px 0 0;
+            }
+            .result-spacer {
+                height: 24px;
+            }
+            .cookie-banner {
+                max-width: 520px;
+                border-radius: 0 0 20px 20px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .app {
+                max-width: 540px;
+                border-radius: 24px;
+            }
+            .bg-stars {
+                max-width: 540px;
+                border-radius: 24px;
+            }
+            .menu-fab {
+                right: calc(50% - 270px + 20px);
+            }
+            .cookie-banner {
+                max-width: 540px;
+                border-radius: 0 0 24px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── SPLASH SCREEN ─── -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-stars">
+            <span class="star">✦</span>
+            <span class="star">✦</span>
+            <span class="star">✦</span>
+            <span class="star">✦</span>
+            <span class="star">✦</span>
+            <span class="star">✦</span>
+            <span class="star">✦</span>
+            <span class="star">✦</span>
+        </div>
+
+        <div class="splash-content">
+            <div class="splash-brand">✦ Status <span>Star</span></div>
+            <div class="splash-subtitle">Boost your status views</div>
+
+            <div class="splash-loader">
+                <svg viewBox="0 0 60 60">
+                    <circle cx="30" cy="30" r="25" class="loader-circle-bg" />
+                    <circle cx="30" cy="30" r="25" class="loader-circle-progress" />
+                </svg>
+                <span class="loader-star">✦</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── COOKIE CONSENT BANNER ─── -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-text">
+            <strong>We use minimal cookies.</strong> We use cookies to remember your country preference and last used number. No tracking cookies are used. By continuing, you agree to our <a href="#" id="cookiePolicyLink" style="color:var(--green);text-decoration:underline;">Cookie Policy</a>.
+        </div>
+        <div class="cookie-buttons">
+            <button class="btn-cookie decline" id="cookieDecline">Decline</button>
+            <button class="btn-cookie accept" id="cookieAccept">Accept</button>
+        </div>
+    </div>
+
+    <!-- ─── TOAST ─── -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ─── BACKGROUND STARS ─── -->
+    <div class="bg-stars">
+        <span class="star">✦</span>
+        <span class="star">✦</span>
+        <span class="star">✦</span>
+        <span class="star">✦</span>
+        <span class="star">✦</span>
+        <span class="star">✦</span>
+        <span class="star">✦</span>
+        <span class="star">✦</span>
+    </div>
+
+    <!-- ─── APP ─── -->
+    <div class="app" id="app">
+
+        <!-- ─── SCROLLABLE CONTENT ─── -->
+        <div class="scroll-content" id="scrollContent">
+
+            <!-- Top Decorations -->
+            <div class="top-deco">
+                <div class="scribble-line"></div>
+                <span class="doodle-star">✦</span>
+                <div class="scribble-line"></div>
+            </div>
+
+            <!-- Brand -->
+            <div class="brand-header">
+                <h1>✦ Status <span>Star</span></h1>
+                <span class="brand-badge">Live</span>
+            </div>
+
+            <!-- Hero -->
+            <div class="hero-section">
+                <div class="tagline">
+                    <span class="icon-star-sm">✦</span> Boost your views
+                </div>
+                <div class="main-headline">
+                    Get <span class="highlight-wa">WhatsApp</span> &amp; <span class="highlight-tg">Telegram</span><br />status viewers
+                </div>
+            </div>
+
+            <!-- Live Counter -->
+            <div class="live-counter">
+                <div class="dot"></div>
+                <span class="count" id="liveCount">0</span>
+                <span class="label">visits today</span>
+                <span class="trend">↑ 0%</span>
+            </div>
+
+            <!-- ─── DIVIDER ─── -->
+            <hr class="section-divider" />
+
+            <!-- ─── INPUT CARD ─── -->
+            <div class="input-card">
+
+                <!-- Country Selector -->
+                <div class="country-selector" id="countrySelector">
+                    <div class="country-info">
+                        <span class="country-flag" id="selectedFlag">🇹🇿</span>
+                        <span class="country-name" id="selectedCountryEl">Tanzania</span>
+                        <span class="country-code-display" id="selectedDial">+255</span>
+                    </div>
+                    <span class="arrow-down">⌄</span>
+                </div>
+
+                <!-- Phone Input -->
+                <div class="input-group">
+                    <span class="dial-code" id="dialCode">+255</span>
+                    <span class="validation-indicator" id="validationIndicator"></span>
+                    <input type="tel" id="phoneInput" placeholder="Enter phone number" maxlength="15" autocomplete="tel" />
+                    <button class="clear-btn" id="clearBtn">✕</button>
+                </div>
+
+                <div class="last-used-label" id="lastUsedLabel">
+                    <span class="icon-edit">✦</span> Last used: <span id="lastUsedNumber"></span>
+                </div>
+
+                <!-- Check Button -->
+                <button class="btn-primary" id="checkBtn" disabled>
+                    <span class="icon-btn">↓</span>
+                    <span class="btn-text">Check Phone Number</span>
+                    <span class="spinner"></span>
+                </button>
+
+            </div>
+
+            <!-- ─── DIVIDER ─── -->
+            <hr class="section-divider" />
+
+            <!-- ─── BLANK SPACE FOR RESULTS ─── -->
+            <div class="result-spacer"></div>
+
+            <!-- ─── RESULT AREA ─── -->
+            <div class="result-area" id="resultArea">
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState">
+                    <span class="icon-star-lg">✦</span>
+                    Enter your number to check<br />if you are in today's Contacts File
+                </div>
+
+                <!-- Result Content -->
+                <div class="result-content" id="resultContent">
+                    <div class="result-status">
+                        <span class="status-icon" id="statusIcon">✦</span>
+                        <span class="status-text" id="statusText">You are in today's Contacts File</span>
+                    </div>
+                    <div class="result-number" id="resultNumber">+255 712345678</div>
+                    <div class="result-meta" id="resultMeta">
+                        <div class="meta-row">
+                            <span class="meta-label">Status:</span>
+                            <span class="meta-value" id="metaStatus">Available now</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">Generated:</span>
+                            <span class="meta-value" id="metaGenerated">Today at 12:00 AM EAT (Your local time: 12:00 AM)</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">Next update:</span>
+                            <span class="meta-value" id="metaNext">Tomorrow at 12:00 AM EAT (Your local time: 12:00 AM)</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">Contacts:</span>
+                            <span class="meta-value" id="metaCount">0 people</span>
+                        </div>
+                    </div>
+                    <div class="result-actions" id="resultActions">
+                        <!-- Dynamic buttons inserted here -->
+                    </div>
+                    <div class="share-section" id="shareSection">
+                        <div class="share-label">Share this tool with friends</div>
+                        <div class="share-buttons">
+                            <button class="btn-share whatsapp" id="shareWhatsapp">WhatsApp</button>
+                            <button class="btn-share telegram" id="shareTelegram">Telegram</button>
+                            <button class="btn-share" id="shareCopy">Copy Link</button>
+                        </div>
+                    </div>
+                    <div class="result-tip" id="resultTip">
+                        <span class="icon-tip">✦</span>
+                        <span id="tipText">Downloaded? Open the file and add all contacts to your phone.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── BLANK SPACE BELOW RESULT ─── -->
+            <div class="result-spacer"></div>
+
+            <!-- ─── FOOTER ─── -->
+            <footer class="footer">
+                <div class="footer-links">
+                    <a id="footerPrivacy">Privacy Policy</a>
+                    <a id="footerTerms">Terms of Use</a>
+                    <a id="footerCookies">Cookie Policy</a>
+                    <a id="footerDisclaimer">Disclaimer</a>
+                    <a id="footerFeedback">Feedback</a>
+                    <a id="footerContact">Contact Us</a>
+                    <a id="footerAbout">About</a>
+                    <a id="footerWhatsApp">WhatsApp</a>
+                    <a id="footerTelegram">Telegram</a>
+                </div>
+                <p class="footer-copyright" id="footerCopyright">© 2026 Status Star. All rights reserved.</p>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <!-- ─── COUNTRY MODAL ─── -->
+    <div class="country-modal-overlay" id="countryModal">
+        <div class="country-modal">
+            <div class="country-modal-header">
+                <span class="modal-title">Select Country</span>
+                <button class="modal-close" id="closeCountryModal">✕</button>
+            </div>
+            <div class="country-modal-search">
+                <input type="text" id="countrySearch" placeholder="Search countries..." />
+            </div>
+            <div class="country-modal-list" id="countryList">
+                <!-- Countries populated by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelCountryModal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── VERIFICATION MODAL ─── -->
+    <div class="verify-modal-overlay" id="verifyModal">
+        <div class="verify-modal">
+            <div class="verify-handle"></div>
+            <div class="verify-title">Is this your number?</div>
+            <div class="verify-number" id="verifyNumber">+255 712345678</div>
+            <div class="verify-hint">We will check if it is in today's Contacts File</div>
+            <div class="verify-actions">
+                <button class="btn-verify edit" id="verifyEdit">Edit</button>
+                <button class="btn-verify confirm" id="verifyConfirm">Yes, Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── RATE LIMIT MODAL ─── -->
+    <div class="rate-limit-overlay" id="rateLimitModal">
+        <div class="rate-limit-modal">
+            <span class="rate-icon">✦</span>
+            <div class="rate-title" id="rateTitle">Daily Limit Reached</div>
+            <div class="rate-desc" id="rateDesc">You have reached your daily limit for this action.</div>
+            <div class="rate-time" id="rateTime">Resets at midnight EAT (Your local time: 12:00 AM)</div>
+            <button class="btn-rate-ok" id="rateOkBtn">OK</button>
+        </div>
+    </div>
+
+    <!-- ─── MENU FAB ─── -->
+    <button class="menu-fab" id="menuFab">☰</button>
+
+    <!-- ─── MENU BOTTOM SHEET ─── -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-sheet">
+            <div class="menu-handle"></div>
+
+            <!-- Menu Main View -->
+            <div class="menu-main" id="menuMain">
+                <div class="menu-header">
+                    <div class="menu-title">✦ Status Star</div>
+                    <div class="menu-subtitle">Boost your status views</div>
+                </div>
+                <div class="menu-list" id="menuList">
+                    <!-- Menu Items -->
+                    <div class="menu-item" data-page="stats">
+                        <span class="menu-icon">✦</span>
+                        <span class="menu-text">Statistics</span>
+                        <span class="menu-arrow">→</span>
+                    </div>
+                    <div class="menu-item" data-page="howto">
+                        <span class="menu-icon">✦</span>
+                        <span class="menu-text">How to Use</span>
+                        <span class="menu-arrow">→</span>
+                    </div>
+                    <div class="menu-item" data-page="notifications">
+                        <span class="menu-icon">✦</span>
+                        <span class="menu-text">Notifications</span>
+                        <span class="menu-arrow">→</span>
+                    </div>
+                    <div class="menu-item" data-page="share">
+                        <span class="menu-icon">✦</span>
+                        <span class="menu-text">Share This Tool</span>
+                        <span class="menu-arrow">→</span>
+                    </div>
+                    <div class="menu-item" data-page="faq">
+                        <span class="menu-icon">✦</span>
+                        <span class="menu-text">FAQ</span>
+                        <span class="menu-arrow">→</span>
+                    </div>
+                </div>
+                <div class="menu-footer">
+                    <div class="menu-version">✦ Version 1.0.0</div>
+                    <button class="btn-close-menu" id="closeMenu">Close</button>
+                </div>
+            </div>
+
+            <!-- Menu Page View -->
+            <div class="menu-page" id="menuPage">
+                <div class="menu-page-back" id="menuPageBack">
+                    <span class="back-icon">←</span> Back to Menu
+                </div>
+                <div class="menu-page-title" id="menuPageTitle">Page Title</div>
+                <div class="menu-page-content" id="menuPageContent">
+                    <!-- Content loaded by JavaScript -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ─── JAVASCRIPT ─── -->
+    <script>
+        // ─── SUPABASE CONFIG ───
+        const SUPABASE_URL = 'https://gudsybbywbksilodgahg.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_vwdN0sAkVlE5xxAKBkoJ7A_X5lVDMPt';
+
+        // ─── SUPPORTED CHANNELS ───
+        const CHANNELS = {
+            whatsapp: 'https://whatsapp.com/channel/0029Vb8G9SoFy72EY63h4p1U',
+            telegram: 'https://t.me/status_star_worldwide'
+        };
+
+        // ─── SUPABASE CLIENT ───
+        const supabase = supabase_js.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        (function() {
+            'use strict';
+
+            // ─── COUNTRIES DATA ───
+            const countries = [
+                { code: 'TZ', name: 'Tanzania', dial: '+255', flag: '🇹🇿', example: '712345678' },
+                { code: 'KE', name: 'Kenya', dial: '+254', flag: '🇰🇪', example: '712345678' },
+                { code: 'UG', name: 'Uganda', dial: '+256', flag: '🇺🇬', example: '712345678' },
+                { code: 'US', name: 'United States', dial: '+1', flag: '🇺🇸', example: '2345678901' },
+                { code: 'GB', name: 'United Kingdom', dial: '+44', flag: '🇬🇧', example: '7123456789' },
+                { code: 'CA', name: 'Canada', dial: '+1', flag: '🇨🇦', example: '2345678901' },
+                { code: 'AU', name: 'Australia', dial: '+61', flag: '🇦🇺', example: '412345678' },
+                { code: 'DE', name: 'Germany', dial: '+49', flag: '🇩🇪', example: '15123456789' },
+                { code: 'FR', name: 'France', dial: '+33', flag: '🇫🇷', example: '612345678' },
+                { code: 'IT', name: 'Italy', dial: '+39', flag: '🇮🇹', example: '3123456789' },
+                { code: 'ES', name: 'Spain', dial: '+34', flag: '🇪🇸', example: '612345678' },
+                { code: 'PT', name: 'Portugal', dial: '+351', flag: '🇵🇹', example: '912345678' },
+                { code: 'NL', name: 'Netherlands', dial: '+31', flag: '🇳🇱', example: '612345678' },
+                { code: 'BE', name: 'Belgium', dial: '+32', flag: '🇧🇪', example: '471234567' },
+                { code: 'CH', name: 'Switzerland', dial: '+41', flag: '🇨🇭', example: '791234567' },
+                { code: 'AT', name: 'Austria', dial: '+43', flag: '🇦🇹', example: '6641234567' },
+                { code: 'SE', name: 'Sweden', dial: '+46', flag: '🇸🇪', example: '701234567' },
+                { code: 'NO', name: 'Norway', dial: '+47', flag: '🇳🇴', example: '41234567' },
+                { code: 'DK', name: 'Denmark', dial: '+45', flag: '🇩🇰', example: '20123456' },
+                { code: 'FI', name: 'Finland', dial: '+358', flag: '🇫🇮', example: '401234567' },
+                { code: 'IE', name: 'Ireland', dial: '+353', flag: '🇮🇪', example: '851234567' },
+                { code: 'NZ', name: 'New Zealand', dial: '+64', flag: '🇳🇿', example: '211234567' },
+                { code: 'ZA', name: 'South Africa', dial: '+27', flag: '🇿🇦', example: '712345678' },
+                { code: 'NG', name: 'Nigeria', dial: '+234', flag: '🇳🇬', example: '8012345678' },
+                { code: 'GH', name: 'Ghana', dial: '+233', flag: '🇬🇭', example: '201234567' },
+                { code: 'RW', name: 'Rwanda', dial: '+250', flag: '🇷🇼', example: '781234567' },
+                { code: 'ET', name: 'Ethiopia', dial: '+251', flag: '🇪🇹', example: '901234567' },
+                { code: 'ZM', name: 'Zambia', dial: '+260', flag: '🇿🇲', example: '761234567' },
+                { code: 'ZW', name: 'Zimbabwe', dial: '+263', flag: '🇿🇼', example: '712345678' },
+                { code: 'MW', name: 'Malawi', dial: '+265', flag: '🇲🇼', example: '881234567' },
+                { code: 'MZ', name: 'Mozambique', dial: '+258', flag: '🇲🇿', example: '821234567' },
+                { code: 'AO', name: 'Angola', dial: '+244', flag: '🇦🇴', example: '921234567' },
+                { code: 'MA', name: 'Morocco', dial: '+212', flag: '🇲🇦', example: '612345678' },
+                { code: 'EG', name: 'Egypt', dial: '+20', flag: '🇪🇬', example: '1012345678' },
+                { code: 'AE', name: 'United Arab Emirates', dial: '+971', flag: '🇦🇪', example: '501234567' },
+                { code: 'SA', name: 'Saudi Arabia', dial: '+966', flag: '🇸🇦', example: '501234567' },
+                { code: 'IN', name: 'India', dial: '+91', flag: '🇮🇳', example: '9876543210' },
+                { code: 'PK', name: 'Pakistan', dial: '+92', flag: '🇵🇰', example: '3123456789' },
+                { code: 'BD', name: 'Bangladesh', dial: '+880', flag: '🇧🇩', example: '1712345678' },
+                { code: 'LK', name: 'Sri Lanka', dial: '+94', flag: '🇱🇰', example: '712345678' },
+                { code: 'NP', name: 'Nepal', dial: '+977', flag: '🇳🇵', example: '9812345678' },
+                { code: 'MY', name: 'Malaysia', dial: '+60', flag: '🇲🇾', example: '123456789' },
+                { code: 'SG', name: 'Singapore', dial: '+65', flag: '🇸🇬', example: '81234567' },
+                { code: 'PH', name: 'Philippines', dial: '+63', flag: '🇵🇭', example: '9123456789' },
+                { code: 'ID', name: 'Indonesia', dial: '+62', flag: '🇮🇩', example: '8123456789' },
+                { code: 'TH', name: 'Thailand', dial: '+66', flag: '🇹🇭', example: '812345678' },
+                { code: 'VN', name: 'Vietnam', dial: '+84', flag: '🇻🇳', example: '912345678' },
+                { code: 'JP', name: 'Japan', dial: '+81', flag: '🇯🇵', example: '9012345678' },
+                { code: 'KR', name: 'South Korea', dial: '+82', flag: '🇰🇷', example: '1012345678' },
+                { code: 'CN', name: 'China', dial: '+86', flag: '🇨🇳', example: '13812345678' },
+                { code: 'RU', name: 'Russia', dial: '+7', flag: '🇷🇺', example: '9123456789' },
+                { code: 'BR', name: 'Brazil', dial: '+55', flag: '🇧🇷', example: '11912345678' },
+                { code: 'AR', name: 'Argentina', dial: '+54', flag: '🇦🇷', example: '91112345678' },
+                { code: 'MX', name: 'Mexico', dial: '+52', flag: '🇲🇽', example: '5512345678' },
+                { code: 'CO', name: 'Colombia', dial: '+57', flag: '🇨🇴', example: '3012345678' },
+                { code: 'CL', name: 'Chile', dial: '+56', flag: '🇨🇱', example: '912345678' },
+                { code: 'PE', name: 'Peru', dial: '+51', flag: '🇵🇪', example: '912345678' },
+                { code: 'VE', name: 'Venezuela', dial: '+58', flag: '🇻🇪', example: '4121234567' },
+                { code: 'TR', name: 'Turkey', dial: '+90', flag: '🇹🇷', example: '5012345678' },
+                { code: 'GR', name: 'Greece', dial: '+30', flag: '🇬🇷', example: '6912345678' },
+                { code: 'PL', name: 'Poland', dial: '+48', flag: '🇵🇱', example: '501234567' },
+                { code: 'UA', name: 'Ukraine', dial: '+380', flag: '🇺🇦', example: '501234567' },
+                { code: 'IL', name: 'Israel', dial: '+972', flag: '🇮🇱', example: '501234567' },
+                { code: 'IR', name: 'Iran', dial: '+98', flag: '🇮🇷', example: '9123456789' },
+                { code: 'IQ', name: 'Iraq', dial: '+964', flag: '🇮🇶', example: '7712345678' },
+                { code: 'JO', name: 'Jordan', dial: '+962', flag: '🇯🇴', example: '791234567' },
+                { code: 'LB', name: 'Lebanon', dial: '+961', flag: '🇱🇧', example: '71123456' },
+                { code: 'KW', name: 'Kuwait', dial: '+965', flag: '🇰🇼', example: '50123456' },
+                { code: 'QA', name: 'Qatar', dial: '+974', flag: '🇶🇦', example: '50123456' },
+                { code: 'BH', name: 'Bahrain', dial: '+973', flag: '🇧🇭', example: '36123456' },
+                { code: 'OM', name: 'Oman', dial: '+968', flag: '🇴🇲', example: '92123456' },
+                { code: 'YE', name: 'Yemen', dial: '+967', flag: '🇾🇪', example: '711234567' },
+                { code: 'SY', name: 'Syria', dial: '+963', flag: '🇸🇾', example: '941234567' },
+                { code: 'PS', name: 'Palestine', dial: '+970', flag: '🇵🇸', example: '591234567' },
+                { code: 'AF', name: 'Afghanistan', dial: '+93', flag: '🇦🇫', example: '701234567' }
+            ];
+
+            // Sort countries by name
+            countries.sort((a, b) => a.name.localeCompare(b.name));
+
+            // ─── DOM REFS ───
+            const splashScreen = document.getElementById('splashScreen');
+            const app = document.getElementById('app');
+            const scrollContent = document.getElementById('scrollContent');
+            const countrySelector = document.getElementById('countrySelector');
+            const selectedFlag = document.getElementById('selectedFlag');
+            const selectedCountryEl = document.getElementById('selectedCountryEl');
+            const selectedDial = document.getElementById('selectedDial');
+            const dialCode = document.getElementById('dialCode');
+            const phoneInput = document.getElementById('phoneInput');
+            const clearBtn = document.getElementById('clearBtn');
+            const checkBtn = document.getElementById('checkBtn');
+            const resultArea = document.getElementById('resultArea');
+            const emptyState = document.getElementById('emptyState');
+            const resultContent = document.getElementById('resultContent');
+            const statusIcon = document.getElementById('statusIcon');
+            const statusText = document.getElementById('statusText');
+            const resultNumber = document.getElementById('resultNumber');
+            const metaStatus = document.getElementById('metaStatus');
+            const metaGenerated = document.getElementById('metaGenerated');
+            const metaNext = document.getElementById('metaNext');
+            const metaCount = document.getElementById('metaCount');
+            const resultActions = document.getElementById('resultActions');
+            const shareSection = document.getElementById('shareSection');
+            const tipText = document.getElementById('tipText');
+            const liveCount = document.getElementById('liveCount');
+            const toast = document.getElementById('toast');
+            const validationIndicator = document.getElementById('validationIndicator');
+            const cookieBanner = document.getElementById('cookieBanner');
+
+            const lastUsedLabel = document.getElementById('lastUsedLabel');
+            const lastUsedNumber = document.getElementById('lastUsedNumber');
+
+            // ─── MODAL REFS ───
+            const countryModal = document.getElementById('countryModal');
+            const countryList = document.getElementById('countryList');
+            const countrySearch = document.getElementById('countrySearch');
+            const closeCountryModal = document.getElementById('closeCountryModal');
+            const cancelCountryModal = document.getElementById('cancelCountryModal');
+
+            const verifyModal = document.getElementById('verifyModal');
+            const verifyNumber = document.getElementById('verifyNumber');
+            const verifyEdit = document.getElementById('verifyEdit');
+            const verifyConfirm = document.getElementById('verifyConfirm');
+
+            const rateLimitModal = document.getElementById('rateLimitModal');
+            const rateTitle = document.getElementById('rateTitle');
+            const rateDesc = document.getElementById('rateDesc');
+            const rateTime = document.getElementById('rateTime');
+            const rateOkBtn = document.getElementById('rateOkBtn');
+
+            const menuFab = document.getElementById('menuFab');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const closeMenu = document.getElementById('closeMenu');
+            const menuMain = document.getElementById('menuMain');
+            const menuPage = document.getElementById('menuPage');
+            const menuPageBack = document.getElementById('menuPageBack');
+            const menuPageTitle = document.getElementById('menuPageTitle');
+            const menuPageContent = document.getElementById('menuPageContent');
+
+            // ─── STATE ───
+            let currentCountry = countries.find(c => c.code === 'TZ');
+            let currentPhone = '';
+            let isValidNumber = false;
+            let toastTimeout = null;
+            let audioCtx = null;
+            let isChecking = false;
+
+            // ─── DEVICE FINGERPRINTING ───
+            function getDeviceId() {
+                try {
+                    const factors = [
+                        navigator.userAgent || '',
+                        navigator.language || '',
+                        screen.width || '',
+                        screen.height || '',
+                        navigator.hardwareConcurrency || '',
+                        new Date().getTimezoneOffset() || '',
+                        navigator.platform || ''
+                    ];
+                    const hash = factors.join('|');
+                    let hashVal = 0;
+                    for (let i = 0; i < hash.length; i++) {
+                        const char = hash.charCodeAt(i);
+                        hashVal = ((hashVal << 5) - hashVal) + char;
+                        hashVal = hashVal & hashVal;
+                    }
+                    return hashVal.toString(36);
+                } catch {
+                    return Math.random().toString(36).substring(2, 10);
+                }
+            }
+
+            const deviceId = getDeviceId();
+
+            // ─── SUPABASE HELPERS ───
+            async function callEdgeFunction(functionName, payload) {
+                const url = `${SUPABASE_URL}/functions/v1/${functionName}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Something went wrong');
+                }
+
+                return await response.json();
+            }
+
+            async function checkNumber(phone) {
+                return await callEdgeFunction('check-number', {
+                    phoneNumber: phone,
+                    deviceId: deviceId
+                });
+            }
+
+            async function addNumber(phone, countryCode, countryName) {
+                return await callEdgeFunction('add-number', {
+                    phoneNumber: phone,
+                    countryCode: countryCode,
+                    countryName: countryName,
+                    deviceId: deviceId
+                });
+            }
+
+            async function submitFeedback(message, email) {
+                return await callEdgeFunction('submit-feedback', {
+                    message: message,
+                    email: email || '',
+                    countryCode: currentCountry.dial,
+                    countryName: currentCountry.name,
+                    deviceId: deviceId
+                });
+            }
+
+            async function submitContact(subject, message, email) {
+                return await callEdgeFunction('submit-contact', {
+                    subject: subject,
+                    message: message,
+                    email: email,
+                    countryCode: currentCountry.dial,
+                    countryName: currentCountry.name,
+                    deviceId: deviceId
+                });
+            }
+
+            async function getTodayStats() {
+                const { data, error } = await supabase
+                    .from('daily_stats')
+                    .select('visit_count')
+                    .order('visit_date', { ascending: false })
+                    .limit(1);
+
+                if (error) throw error;
+                return data && data.length > 0 ? data[0].visit_count : 0;
+            }
+
+            async function getCountryStats() {
+                const { data, error } = await supabase
+                    .from('country_stats')
+                    .select('country_name, total_users')
+                    .order('total_users', { ascending: false })
+                    .limit(5);
+
+                if (error) return [];
+                return data || [];
+            }
+
+            // ─── TIME HELPERS ───
+            function getEATTime() {
+                const now = new Date();
+                const eatOffset = 3 * 60;
+                const userOffset = now.getTimezoneOffset();
+                const diff = eatOffset + userOffset;
+                return new Date(now.getTime() + diff * 60000);
+            }
+
+            function formatLocalTime(date) {
+                return date.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                });
+            }
+
+            function getLocalTimeFromEAT(eatHour = 0, eatMinute = 0) {
+                const now = new Date();
+                const eatOffset = 3 * 60;
+                const userOffset = now.getTimezoneOffset();
+                const diff = eatOffset + userOffset;
+                const eatDate = new Date(now);
+                eatDate.setHours(eatHour, eatMinute, 0, 0);
+                return new Date(eatDate.getTime() - diff * 60000);
+            }
+
+            function getNextUpdateDisplay() {
+                const now = new Date();
+                const eatNow = getEATTime();
+                const eatHour = eatNow.getHours();
+
+                let nextUpdateEAT = new Date(eatNow);
+                if (eatHour >= 0) {
+                    nextUpdateEAT.setDate(nextUpdateEAT.getDate() + 1);
+                }
+                nextUpdateEAT.setHours(0, 0, 0, 0);
+
+                const localNextUpdate = new Date(nextUpdateEAT.getTime() - (eatNow.getTimezoneOffset() - now.getTimezoneOffset()) *
+                    60000);
+                const localTime = formatLocalTime(localNextUpdate);
+
+                return `Tomorrow at 12:00 AM EAT (Your local time: ${localTime})`;
+            }
+
+            function getRateLimitTimeDisplay() {
+                const localTime = formatLocalTime(getLocalTimeFromEAT(0, 0));
+                return `Resets at midnight EAT (Your local time: ${localTime})`;
+            }
+
+            function updateTimeDisplays() {
+                if (metaGenerated) {
+                    const localTime = formatLocalTime(new Date());
+                    metaGenerated.textContent = `Today at 12:00 AM EAT (Your local time: ${localTime})`;
+                }
+                if (metaNext) {
+                    metaNext.textContent = getNextUpdateDisplay();
+                }
+                if (rateTime) {
+                    rateTime.textContent = getRateLimitTimeDisplay();
+                }
+            }
+
+            // ─── TOAST ───
+            function showToast(msg, duration = 2600) {
+                toast.textContent = msg;
+                toast.classList.add('visible');
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('visible');
+                }, duration);
+            }
+
+            // ─── SCROLL LOCKING ───
+            function lockScroll() {
+                if (scrollContent) {
+                    scrollContent.style.overflow = 'hidden';
+                    scrollContent.style.height = '100%';
+                    scrollContent.style.flex = 'none';
+                }
+            }
+
+            function unlockScroll() {
+                if (scrollContent) {
+                    scrollContent.style.overflow = 'auto';
+                    scrollContent.style.height = '';
+                    scrollContent.style.flex = '';
+                }
+            }
+
+            // ─── AUDIO ───
+            function initAudio() {
+                if (!audioCtx) {
+                    audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+
+            function playClick() {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.exponentialRampToValueAtTime(80, now + 0.08);
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            }
+
+            function playSuccess() {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const now = audioCtx.currentTime;
+                [523, 659, 784].forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + i * 0.08);
+                    gain.gain.setValueAtTime(0.10, now + i * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.12);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now + i * 0.08);
+                    osc.stop(now + i * 0.08 + 0.12);
+                });
+            }
+
+            // ─── SPLASH SCREEN ───
+            function hideSplash() {
+                splashScreen.classList.add('hidden');
+                app.classList.add('visible');
+                setTimeout(() => {
+                    unlockScroll();
+                    splashScreen.style.display = 'none';
+                }, 800);
+            }
+
+            // ─── COOKIE CONSENT ───
+            function initCookieBanner() {
+                const consent = localStorage.getItem('statusStar_cookieConsent');
+                if (!consent) {
+                    cookieBanner.classList.add('visible');
+                }
+            }
+
+            document.getElementById('cookieAccept').addEventListener('click', function() {
+                localStorage.setItem('statusStar_cookieConsent', 'accepted');
+                cookieBanner.classList.remove('visible');
+                showToast('Cookie preferences saved.');
+            });
+
+            document.getElementById('cookieDecline').addEventListener('click', function() {
+                localStorage.setItem('statusStar_cookieConsent', 'declined');
+                cookieBanner.classList.remove('visible');
+                showToast('You have declined cookies. Some features may be limited.');
+            });
+
+            document.getElementById('cookiePolicyLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                openFooterSheet('Cookie Policy',
+                    'We use minimal cookies to remember your country preference and last used number. No tracking cookies are used. You can clear your data at any time from your browser settings.',
+                    false, false);
+            });
+
+            // ─── COUNTRY SELECTION ───
+            function getMinLength(country) {
+                const example = country.example;
+                return Math.max(7, example.length - 2);
+            }
+
+            function validatePhoneNumber() {
+                const phone = phoneInput.value.trim();
+                const minLength = getMinLength(currentCountry);
+
+                if (phone.length === 0) {
+                    validationIndicator.className = 'validation-indicator';
+                    isValidNumber = false;
+                    checkBtn.disabled = true;
+                    return false;
+                }
+
+                const isValid = phone.length >= minLength && /^\d+$/.test(phone);
+
+                if (isValid) {
+                    validationIndicator.className = 'validation-indicator valid';
+                    validationIndicator.textContent = '✓';
+                    isValidNumber = true;
+                    checkBtn.disabled = false;
+                } else {
+                    validationIndicator.className = 'validation-indicator invalid';
+                    validationIndicator.textContent = '✗';
+                    isValidNumber = false;
+                    checkBtn.disabled = true;
+                }
+
+                return isValidNumber;
+            }
+
+            function updateCountryUI(country) {
+                currentCountry = country;
+                selectedFlag.textContent = country.flag;
+                selectedCountryEl.textContent = country.name;
+                selectedDial.textContent = country.dial;
+                dialCode.textContent = country.dial;
+
+                const saved = loadSavedNumber(country.code);
+                if (saved) {
+                    phoneInput.value = saved;
+                    lastUsedNumber.textContent = saved;
+                    lastUsedLabel.classList.add('visible');
+                    clearBtn.classList.add('visible');
+                    validatePhoneNumber();
+                } else {
+                    phoneInput.value = '';
+                    lastUsedLabel.classList.remove('visible');
+                    clearBtn.classList.remove('visible');
+                    validationIndicator.className = 'validation-indicator';
+                    isValidNumber = false;
+                    checkBtn.disabled = true;
+                }
+
+                phoneInput.placeholder = `e.g., ${country.example}`;
+            }
+
+            function loadSavedNumber(countryCode) {
+                try {
+                    const saved = JSON.parse(localStorage.getItem('statusStar_numbers') || '{}');
+                    return saved[countryCode] || '';
+                } catch {
+                    return '';
+                }
+            }
+
+            function saveNumber(countryCode, number) {
+                try {
+                    const saved = JSON.parse(localStorage.getItem('statusStar_numbers') || '{}');
+                    saved[countryCode] = number;
+                    localStorage.setItem('statusStar_numbers', JSON.stringify(saved));
+                } catch {}
+            }
+
+            // ─── POPULATE COUNTRY LIST ───
+            function renderCountries(filter = '') {
+                const filtered = countries.filter(c =>
+                    c.name.toLowerCase().includes(filter.toLowerCase()) ||
+                    c.dial.includes(filter) ||
+                    c.code.toLowerCase().includes(filter.toLowerCase())
+                );
+
+                countryList.innerHTML = '';
+                filtered.forEach(c => {
+                    const div = document.createElement('div');
+                    div.className = 'country-item' + (c.code === currentCountry.code ? ' selected' : '');
+                    div.innerHTML = `
+                        <div class="country-left">
+                            <span class="country-flag">${c.flag}</span>
+                            <span class="country-name">${c.name}</span>
+                        </div>
+                        <span class="country-dial">${c.dial}</span>
+                        <span class="country-check">✓</span>
+                    `;
+                    div.addEventListener('click', () => {
+                        playClick();
+                        updateCountryUI(c);
+                        closeCountryModalFunc();
+                        phoneInput.focus();
+                        validatePhoneNumber();
+                    });
+                    countryList.appendChild(div);
+                });
+
+                if (filtered.length === 0) {
+                    countryList.innerHTML =
+                        `<div style="padding:20px;text-align:center;color:var(--text-secondary);">No countries found</div>`;
+                }
+            }
+
+            // ─── COUNTRY MODAL ───
+            function openCountryModal() {
+                countryModal.classList.add('visible');
+                countrySearch.value = '';
+                renderCountries();
+                lockScroll();
+                setTimeout(() => countrySearch.focus(), 300);
+            }
+
+            function closeCountryModalFunc() {
+                countryModal.classList.remove('visible');
+                unlockScroll();
+            }
+
+            countrySelector.addEventListener('click', () => {
+                playClick();
+                openCountryModal();
+            });
+
+            closeCountryModal.addEventListener('click', closeCountryModalFunc);
+            cancelCountryModal.addEventListener('click', closeCountryModalFunc);
+            countryModal.addEventListener('click', (e) => {
+                if (e.target === countryModal) closeCountryModalFunc();
+            });
+
+            countrySearch.addEventListener('input', (e) => {
+                renderCountries(e.target.value);
+            });
+
+            // ─── PHONE INPUT ───
+            phoneInput.addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, '');
+                clearBtn.classList.toggle('visible', this.value.length > 0);
+
+                if (this.value.length > 0) {
+                    lastUsedLabel.classList.remove('visible');
+                }
+
+                validatePhoneNumber();
+
+                if (resultContent.classList.contains('visible')) {
+                    resultContent.classList.remove('visible');
+                    emptyState.style.display = 'block';
+                }
+            });
+
+            clearBtn.addEventListener('click', function() {
+                playClick();
+                phoneInput.value = '';
+                phoneInput.focus();
+                clearBtn.classList.remove('visible');
+                lastUsedLabel.classList.remove('visible');
+                validationIndicator.className = 'validation-indicator';
+                isValidNumber = false;
+                checkBtn.disabled = true;
+                resultContent.classList.remove('visible');
+                emptyState.style.display = 'block';
+            });
+
+            // ─── VERIFICATION MODAL ───
+            function openVerifyModal(phone) {
+                verifyNumber.textContent = currentCountry.dial + ' ' + phone;
+                verifyModal.classList.add('visible');
+                lockScroll();
+            }
+
+            function closeVerifyModal() {
+                verifyModal.classList.remove('visible');
+                unlockScroll();
+            }
+
+            verifyEdit.addEventListener('click', () => {
+                playClick();
+                closeVerifyModal();
+                phoneInput.focus();
+            });
+
+            verifyConfirm.addEventListener('click', () => {
+                playClick();
+                closeVerifyModal();
+                performCheck();
+            });
+
+            verifyModal.addEventListener('click', (e) => {
+                if (e.target === verifyModal) closeVerifyModal();
+            });
+
+            // ─── PERFORM CHECK ───
+            async function performCheck() {
+                const phone = phoneInput.value.trim();
+                if (!phone) {
+                    showToast('Enter your phone number');
+                    return;
+                }
+
+                if (!isValidNumber) {
+                    showToast('Please enter a valid phone number');
+                    return;
+                }
+
+                checkBtn.classList.add('loading');
+                checkBtn.disabled = true;
+                isChecking = true;
+
+                try {
+                    const result = await checkNumber(phone);
+                    checkBtn.classList.remove('loading');
+                    checkBtn.disabled = false;
+                    isChecking = false;
+
+                    if (!result.success) {
+                        if (result.limit) {
+                            showRateLimitModal(
+                                'Daily Limit Reached',
+                                'You have reached your daily limit for checks. Please try again tomorrow.',
+                                getRateLimitTimeDisplay()
+                            );
+                            return;
+                        }
+                        showToast(result.error || 'Something went wrong');
+                        return;
+                    }
+
+                    await updateLiveCount();
+                    showResult(result.status, phone);
+
+                } catch (error) {
+                    checkBtn.classList.remove('loading');
+                    checkBtn.disabled = false;
+                    isChecking = false;
+                    showToast(error.message || 'Something went wrong. Please try again.');
+                }
+            }
+
+            // ─── UPDATE LIVE COUNT ───
+            async function updateLiveCount() {
+                try {
+                    const count = await getTodayStats();
+                    liveCount.textContent = count.toLocaleString();
+                    const trend = Math.floor(Math.random() * 20) - 5;
+                    document.querySelector('.trend').textContent = trend >= 0 ? `↑ ${trend}%` : `↓ ${Math.abs(trend)}%`;
+                } catch (error) {
+                    console.error('Error fetching live count:', error);
+                }
+            }
+
+            // ─── SHOW RESULT ───
+            function showResult(state, phone) {
+                emptyState.style.display = 'none';
+                resultContent.classList.add('visible');
+
+                const formattedNumber = currentCountry.dial + ' ' + phone;
+                resultNumber.textContent = formattedNumber;
+
+                resultActions.innerHTML = '';
+
+                const localTime = formatLocalTime(new Date());
+                const nextUpdateLocal = formatLocalTime(getLocalTimeFromEAT(0, 0));
+
+                let icon = '✦';
+                let status = '';
+                let tip = '';
+                let primaryBtn = null;
+
+                if (state === 'found') {
+                    icon = '✓';
+                    status = 'You are in today\'s Contacts File';
+                    statusIcon.className = 'status-icon found';
+                    metaStatus.textContent = 'Available now';
+                    metaGenerated.textContent = `Today at 12:00 AM EAT (Your local time: ${localTime})`;
+                    metaNext.textContent = `Tomorrow at 12:00 AM EAT (Your local time: ${nextUpdateLocal})`;
+                    metaCount.textContent = liveCount.textContent + ' people';
+                    tip = 'Downloaded? Open the file and add all contacts to your phone.';
+
+                    primaryBtn = {
+                        text: 'Download Contacts File',
+                        icon: '↓',
+                        action: async () => {
+                            playClick();
+                            try {
+                                const { data, error } = await supabase
+                                    .from('vcf_generations')
+                                    .select('file_url')
+                                    .eq('status', 'completed')
+                                    .order('generation_date', { ascending: false })
+                                    .limit(1);
+
+                                if (error) throw error;
+
+                                if (data && data.length > 0) {
+                                    const fileUrl =
+                                        `${SUPABASE_URL}/storage/v1/object/public/vcf_files/${data[0].file_url}`;
+                                    window.open(fileUrl, '_blank');
+                                    showToast('Downloading Contacts File...');
+                                    playSuccess();
+                                } else {
+                                    showToast('No Contacts File available for today.');
+                                }
+                            } catch (error) {
+                                showToast('Error downloading file. Please try again.');
+                            }
+                        }
+                    };
+                } else if (state === 'not_found') {
+                    icon = '✗';
+                    status = 'Not in today\'s Contacts File';
+                    statusIcon.className = 'status-icon not-found';
+                    metaStatus.textContent = 'Not available today';
+                    metaGenerated.textContent = `Today at 12:00 AM EAT (Your local time: ${localTime})`;
+                    metaNext.textContent = `Tomorrow at 12:00 AM EAT (Your local time: ${nextUpdateLocal})`;
+                    metaCount.textContent = liveCount.textContent + ' active users';
+                    tip = 'Add your number to get more status views!';
+
+                    primaryBtn = {
+                        text: 'Add Me to Contacts File',
+                        icon: '+',
+                        action: async () => {
+                            playClick();
+                            const btn = document.querySelector('.btn-action.primary-action');
+                            btn.textContent = 'Adding...';
+                            btn.disabled = true;
+
+                            try {
+                                const result = await addNumber(
+                                    phone,
+                                    currentCountry.dial.replace('+', ''),
+                                    currentCountry.name
+                                );
+
+                                if (result.success) {
+                                    btn.textContent = '✓ Added!';
+                                    btn.className = 'btn-action primary-action';
+                                    btn.style.background = 'var(--surface)';
+                                    btn.style.color = 'var(--text-secondary)';
+                                    btn.disabled = true;
+                                    showToast('You have been added to tomorrow\'s Contacts File!');
+                                    playSuccess();
+                                    statusText.textContent = 'You have been added!';
+                                    statusIcon.textContent = '✦';
+                                    statusIcon.className = 'status-icon pending';
+                                    metaStatus.textContent = 'Added for tomorrow';
+                                    tipText.textContent = 'You will be in tomorrow\'s Contacts File (12:00 AM EAT).';
+                                } else {
+                                    btn.textContent = 'Try Again';
+                                    btn.disabled = false;
+                                    showToast(result.message || 'Something went wrong');
+                                }
+                            } catch (error) {
+                                btn.textContent = 'Try Again';
+                                btn.disabled = false;
+                                showToast(error.message || 'Something went wrong');
+                            }
+                        }
+                    };
+                } else if (state === 'pending') {
+                    icon = '↻';
+                    status = 'Already added for tomorrow';
+                    statusIcon.className = 'status-icon pending';
+                    metaStatus.textContent = 'Pending for tomorrow';
+                    metaGenerated.textContent = `Today at 12:00 AM EAT (Your local time: ${localTime})`;
+                    metaNext.textContent = `Tomorrow at 12:00 AM EAT (Your local time: ${nextUpdateLocal})`;
+                    metaCount.textContent = 'You are in tomorrow\'s file';
+                    tip = 'More users = More status views! Share with friends.';
+
+                    primaryBtn = {
+                        text: 'Share this tool',
+                        icon: '↗',
+                        action: () => {
+                            shareTool();
+                        }
+                    };
+                }
+
+                statusIcon.textContent = icon;
+                statusText.textContent = status;
+                tipText.textContent = tip;
+
+                if (primaryBtn) {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-action primary-action';
+                    btn.innerHTML = `<span class="icon-btn">${primaryBtn.icon}</span> ${primaryBtn.text}`;
+                    btn.addEventListener('click', primaryBtn.action);
+                    resultActions.appendChild(btn);
+                }
+
+                lastUsedNumber.textContent = phone;
+                lastUsedLabel.classList.add('visible');
+            }
+
+            function showRateLimitModal(title, desc, time) {
+                rateTitle.textContent = title;
+                rateDesc.textContent = desc;
+                rateTime.textContent = time || getRateLimitTimeDisplay();
+                rateLimitModal.classList.add('visible');
+                lockScroll();
+            }
+
+            rateOkBtn.addEventListener('click', () => {
+                rateLimitModal.classList.remove('visible');
+                unlockScroll();
+            });
+
+            rateLimitModal.addEventListener('click', (e) => {
+                if (e.target === rateLimitModal) {
+                    rateLimitModal.classList.remove('visible');
+                    unlockScroll();
+                }
+            });
+
+            // ─── CHECK BUTTON ───
+            checkBtn.addEventListener('click', () => {
+                const phone = phoneInput.value.trim();
+                if (!phone) {
+                    showToast('Enter your phone number');
+                    phoneInput.focus();
+                    return;
+                }
+                if (!isValidNumber) {
+                    showToast('Please enter a valid phone number');
+                    phoneInput.focus();
+                    return;
+                }
+                playClick();
+                openVerifyModal(phone);
+            });
+
+            phoneInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (isValidNumber && !checkBtn.disabled) {
+                        checkBtn.click();
+                    } else {
+                        showToast('Please enter a valid phone number');
+                    }
+                }
+            });
+
+            // ─── SHARE TOOL ───
+            function shareTool() {
+                playClick();
+                const url = window.location.href;
+                const msg = encodeURIComponent(
+                    `✦ Status Star - Get more WhatsApp & Telegram status viewers! Join now: ${url}`
+                );
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Status Star',
+                        text: 'Get more WhatsApp & Telegram status viewers!',
+                        url: url
+                    }).catch(() => {});
+                } else {
+                    showToast('Share via WhatsApp or Telegram using the buttons below');
+                }
+            }
+
+            // ─── SHARE BUTTONS ───
+            document.getElementById('shareWhatsapp').addEventListener('click', () => {
+                playClick();
+                const url = window.location.href;
+                const msg = encodeURIComponent(
+                    `✦ Status Star - Get more WhatsApp & Telegram status viewers! Join now: ${url}`
+                );
+                window.open(`https://wa.me/?text=${msg}`, '_blank');
+            });
+
+            document.getElementById('shareTelegram').addEventListener('click', () => {
+                playClick();
+                const url = window.location.href;
+                const msg = encodeURIComponent(
+                    `✦ Status Star - Get more WhatsApp & Telegram status viewers! Join now: ${url}`
+                );
+                window.open(`https://t.me/share/url?url=${url}&text=${msg}`, '_blank');
+            });
+
+            document.getElementById('shareCopy').addEventListener('click', () => {
+                playClick();
+                const url = window.location.href;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        showToast('Link copied to clipboard!');
+                    }).catch(() => {
+                        const input = document.createElement('input');
+                        input.value = url;
+                        document.body.appendChild(input);
+                        input.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(input);
+                        showToast('Link copied to clipboard!');
+                    });
+                } else {
+                    const input = document.createElement('input');
+                    input.value = url;
+                    document.body.appendChild(input);
+                    input.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(input);
+                    showToast('Link copied to clipboard!');
+                }
+            });
+
+            // ─── MENU ───
+            menuFab.addEventListener('click', () => {
+                playClick();
+                menuOverlay.classList.add('visible');
+                menuMain.style.display = 'flex';
+                menuPage.classList.remove('visible');
+                lockScroll();
+            });
+
+            closeMenu.addEventListener('click', () => {
+                playClick();
+                menuOverlay.classList.remove('visible');
+                unlockScroll();
+            });
+
+            menuOverlay.addEventListener('click', (e) => {
+                if (e.target === menuOverlay) {
+                    menuOverlay.classList.remove('visible');
+                    unlockScroll();
+                }
+            });
+
+            // ─── MENU PAGE SYSTEM ───
+            const menuPages = {
+                stats: {
+                    title: 'Statistics',
+                    render: function() {
+                        const localTime = formatLocalTime(new Date());
+                        return `
+                            <div style="margin-bottom:12px;color:var(--modal-hint);font-size:13px;">
+                                Real-time statistics for Status Star
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Today's Visits</span>
+                                <span class="stat-value">${liveCount.textContent}</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Total Users</span>
+                                <span class="stat-value" id="statTotalUsers">Loading...</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Contacts File Size</span>
+                                <span class="stat-value">${liveCount.textContent} contacts</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Active Today</span>
+                                <span class="stat-value" id="statActiveToday">Loading...</span>
+                            </div>
+                            <div style="margin-top:16px;color:var(--modal-hint);font-size:13px;">
+                                <strong style="color:var(--modal-text);">Top Countries</strong>
+                            </div>
+                            <div id="statCountries">
+                                <div class="stat-row">
+                                    <span class="stat-label">Loading...</span>
+                                    <span class="stat-value">...</span>
+                                </div>
+                            </div>
+                            <div style="margin-top:12px;padding:10px;background:var(--modal-input-bg);border-radius:10px;color:var(--modal-hint);font-size:12px;">
+                                ✦ Times shown in EAT (Your local time: ${localTime})
+                            </div>
+                        `;
+                    },
+                    load: async function() {
+                        try {
+                            const { data: totalUsers, error: totalError } = await supabase
+                                .from('contacts')
+                                .select('*', { count: 'exact', head: true });
+
+                            if (!totalError) {
+                                const el = document.getElementById('statTotalUsers');
+                                if (el) el.textContent = totalUsers.toLocaleString();
+                            }
+
+                            const { data: activeUsers, error: activeError } = await supabase
+                                .from('contacts')
+                                .select('*', { count: 'exact', head: true })
+                                .eq('is_active', true);
+
+                            if (!activeError) {
+                                const el = document.getElementById('statActiveToday');
+                                if (el) el.textContent = activeUsers.toLocaleString();
+                            }
+
+                            const countries = await getCountryStats();
+                            const container = document.getElementById('statCountries');
+                            if (container && countries.length > 0) {
+                                container.innerHTML = countries.map(c =>
+                                    `<div class="stat-row">
+                                        <span class="stat-label">${c.country_name}</span>
+                                        <span class="stat-value">${c.total_users.toLocaleString()} users</span>
+                                    </div>`
+                                ).join('');
+                            }
+                        } catch (error) {
+                            console.error('Error loading stats:', error);
+                        }
+                    }
+                },
+                howto: {
+                    title: 'How to Use',
+                    render: function() {
+                        const localTime = formatLocalTime(getLocalTimeFromEAT(0, 0));
+                        return `
+                            <div style="color:var(--modal-hint);font-size:13px;margin-bottom:12px;">
+                                Follow these steps to boost your status views
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">1</span> Select Your Country</div>
+                                <div class="step-desc">Choose your country from the list. Your country code will auto-fill. We recommend selecting your actual location for the best experience.</div>
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">2</span> Enter Your Phone Number</div>
+                                <div class="step-desc">Type your phone number (digits only). Example: 712345678. Make sure to enter the correct number as this is what will be shared in the Contacts File.</div>
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">3</span> Verify Your Number</div>
+                                <div class="step-desc">Confirm your number is correct by tapping "Yes, Continue". This helps prevent errors and ensures your number is accurate.</div>
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">4</span> Check Your Status</div>
+                                <div class="step-desc">We check if you are in today's Contacts File. This process takes just a moment and uses our secure servers.</div>
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">5</span> Download Contacts File</div>
+                                <div class="step-desc">If found, tap "Download Contacts File". The file saves to your device as a VCF file, which is compatible with all major phone contact apps.</div>
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">6</span> Import Contacts (iOS)</div>
+                                <div class="step-desc">Open the downloaded file → Tap "Add All Contacts" → Contacts are saved to your iPhone. You can find them in your Contacts app.</div>
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">7</span> Import Contacts (Android)</div>
+                                <div class="step-desc">Open the downloaded file → Choose "Import to Contacts" → Select "Phone" or "Google Account". The contacts will be added to your address book.</div>
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">8</span> See Results</div>
+                                <div class="step-desc">Open WhatsApp or Telegram and view your status. You will see more viewers! The more people join, the more viewers you'll get.</div>
+                            </div>
+                            <div class="how-to-step">
+                                <div class="step-title"><span class="step-number">9</span> Share & Grow</div>
+                                <div class="step-desc">Share Status Star with friends. More users = bigger Contacts File = more views! Share via WhatsApp, Telegram, or copy the link.</div>
+                            </div>
+                            <div style="margin-top:12px;padding:10px;background:var(--modal-input-bg);border-radius:10px;color:var(--modal-hint);font-size:12px;">
+                                ✦ The Contacts File updates daily at midnight EAT (Your local time: ${localTime})
+                            </div>
+                        `;
+                    }
+                },
+                notifications: {
+                    title: 'Notifications',
+                    render: function() {
+                        const localTime = formatLocalTime(getLocalTimeFromEAT(0, 5));
+                        return `
+                            <div style="color:var(--modal-hint);font-size:13px;margin-bottom:12px;">
+                                Get notified when the new Contacts File is ready each day.
+                            </div>
+                            <div class="notification-toggle">
+                                <span class="toggle-label">Enable notifications</span>
+                                <div class="toggle-switch" id="notificationToggle">
+                                    <div class="toggle-knob"></div>
+                                </div>
+                            </div>
+                            <div style="margin-top:12px;color:var(--modal-hint);font-size:13px;">
+                                <strong style="color:var(--modal-text);">Notification Time:</strong><br />
+                                Daily at 12:05 AM EAT (Your local time: ${localTime})
+                            </div>
+                            <div style="margin-top:12px;padding:10px;background:var(--modal-input-bg);border-radius:10px;color:var(--modal-hint);font-size:12px;">
+                                <strong style="color:var(--modal-text);">How It Works:</strong><br />
+                                1. We generate the Contacts File at midnight EAT<br />
+                                2. You receive a notification on your device<br />
+                                3. Tap to check your status<br />
+                                4. Download the new Contacts File
+                            </div>
+                            <div style="margin-top:12px;color:var(--modal-hint);font-size:12px;">
+                                Note: Notifications will be sent via your device browser. Make sure to allow notifications when prompted.
+                            </div>
+                        `;
+                    }
+                },
+                share: {
+                    title: 'Share This Tool',
+                    render: function() {
+                        return `
+                            <div style="color:var(--modal-hint);font-size:13px;margin-bottom:12px;">
+                                Share Status Star with your friends!
+                                More users = More status views!
+                            </div>
+                            <div class="share-buttons-page">
+                                <button class="btn-share-page whatsapp" id="sharePageWhatsapp">
+                                    Share via WhatsApp
+                                </button>
+                                <button class="btn-share-page telegram" id="sharePageTelegram">
+                                    Share via Telegram
+                                </button>
+                                <button class="btn-share-page" id="sharePageCopy">
+                                    Copy Link
+                                </button>
+                            </div>
+                            <div style="margin-top:14px;color:var(--modal-hint);font-size:12px;">
+                                <strong style="color:var(--modal-text);">Your Share Link:</strong><br />
+                                ${window.location.href}
+                            </div>
+                            <div style="margin-top:12px;padding:10px;background:var(--modal-input-bg);border-radius:10px;color:var(--modal-hint);font-size:12px;">
+                                ✦ Tip: Share with 5 friends to get more status viewers! The more users join, the larger the Contacts File becomes.
+                            </div>
+                        `;
+                    }
+                },
+                faq: {
+                    title: 'FAQ',
+                    render: function() {
+                        const localTime = formatLocalTime(getLocalTimeFromEAT(0, 0));
+                        return `
+                            <div style="color:var(--modal-hint);font-size:13px;margin-bottom:12px;">
+                                Frequently asked questions about Status Star
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Is Status Star free?</div>
+                                <div class="faq-a">A: Yes, Status Star is completely free forever! We believe everyone deserves more status viewers regardless of their budget.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: How does it work?</div>
+                                <div class="faq-a">A: 1. You add your phone number. 2. We include it in a Contacts File. 3. Everyone downloads the file. 4. You get more status viewers! It's that simple.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: What is a Contacts File?</div>
+                                <div class="faq-a">A: A Contacts File (VCF) is a file that adds multiple contacts to your phone at once. It's a standard format used by all major phone manufacturers.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Is my number safe?</div>
+                                <div class="faq-a">A: Yes! We never share your number with anyone. It's only used to include you in the Contacts File. Your privacy is our top priority.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: How often is the Contacts File updated?</div>
+                                <div class="faq-a">A: Every 24 hours at midnight EAT (Your local time: ${localTime}). You can check daily for new contacts and download the latest file.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Can I remove my number?</div>
+                                <div class="faq-a">A: Yes! Contact us via the Feedback or Contact Us form and we'll remove your number. We process all requests within 48 hours.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Will this work on my phone?</div>
+                                <div class="faq-a">A: Yes! It works on all devices: iOS, Android, and Web. The Contacts File format is compatible with all major phone operating systems.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: How many contacts can I get?</div>
+                                <div class="faq-a">A: It depends on how many users join. More users = more contacts! Share with friends to help grow the community.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Do I need to create an account?</div>
+                                <div class="faq-a">A: No! Status Star doesn't require any account creation. Just enter your number and you're good to go.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Is there a limit to how many times I can check?</div>
+                                <div class="faq-a">A: Yes, to prevent abuse, you can check up to 5 times per day and add your number up to 2 times per day. This ensures fair usage for everyone.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: What happens if I change my phone number?</div>
+                                <div class="faq-a">A: Simply add your new number using the "Add Me" button. Your old number will remain in the system until you request removal.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Can businesses use Status Star?</div>
+                                <div class="faq-a">A: Absolutely! Many businesses use Status Star to reach more customers through WhatsApp and Telegram status updates.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Is my data tracked?</div>
+                                <div class="faq-a">A: We only track basic analytics (visits, country) to improve the service. We don't track your browsing history or personal data.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: How do I report a problem?</div>
+                                <div class="faq-a">A: Use the Feedback or Contact Us forms in the footer. We respond to all reports within 24 hours.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">Q: Will Status Star always be free?</div>
+                                <div class="faq-a">A: Yes! Status Star will always be free for all users. We believe in making social visibility accessible to everyone.</div>
+                            </div>
+                        `;
+                    }
+                }
+            };
+
+            // Menu item clicks - open page
+            document.querySelectorAll('.menu-item[data-page]').forEach(item => {
+                item.addEventListener('click', () => {
+                    const pageId = item.dataset.page;
+                    const page = menuPages[pageId];
+                    if (!page) return;
+
+                    playClick();
+                    menuMain.style.display = 'none';
+                    menuPage.classList.add('visible');
+                    menuPageTitle.textContent = page.title;
+                    menuPageContent.innerHTML = page.render();
+
+                    // Load data for stats page
+                    if (pageId === 'stats' && page.load) {
+                        setTimeout(() => page.load(), 100);
+                    }
+
+                    // Set up share page button listeners
+                    if (pageId === 'share') {
+                        setupSharePageButtons();
+                    }
+
+                    // Set up notification toggle
+                    if (pageId === 'notifications') {
+                        setupNotificationToggle();
+                    }
+                });
+            });
+
+            // Back to menu
+            menuPageBack.addEventListener('click', () => {
+                playClick();
+                menuPage.classList.remove('visible');
+                menuMain.style.display = 'flex';
+            });
+
+            // Share page buttons
+            function setupSharePageButtons() {
+                const sharePageWhatsapp = document.getElementById('sharePageWhatsapp');
+                const sharePageTelegram = document.getElementById('sharePageTelegram');
+                const sharePageCopy = document.getElementById('sharePageCopy');
+
+                if (sharePageWhatsapp) {
+                    sharePageWhatsapp.addEventListener('click', () => {
+                        playClick();
+                        const url = window.location.href;
+                        const msg = encodeURIComponent(
+                            `✦ Status Star - Get more WhatsApp & Telegram status viewers! Join now: ${url}`
+                        );
+                        window.open(`https://wa.me/?text=${msg}`, '_blank');
+                    });
+                }
+
+                if (sharePageTelegram) {
+                    sharePageTelegram.addEventListener('click', () => {
+                        playClick();
+                        const url = window.location.href;
+                        const msg = encodeURIComponent(
+                            `✦ Status Star - Get more WhatsApp & Telegram status viewers! Join now: ${url}`
+                        );
+                        window.open(`https://t.me/share/url?url=${url}&text=${msg}`, '_blank');
+                    });
+                }
+
+                if (sharePageCopy) {
+                    sharePageCopy.addEventListener('click', () => {
+                        playClick();
+                        const url = window.location.href;
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(url).then(() => {
+                                showToast('Link copied to clipboard!');
+                            }).catch(() => {
+                                const input = document.createElement('input');
+                                input.value = url;
+                                document.body.appendChild(input);
+                                input.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(input);
+                                showToast('Link copied to clipboard!');
+                            });
+                        } else {
+                            const input = document.createElement('input');
+                            input.value = url;
+                            document.body.appendChild(input);
+                            input.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(input);
+                            showToast('Link copied to clipboard!');
+                        }
+                    });
+                }
+            }
+
+            // Notification toggle
+            function setupNotificationToggle() {
+                const toggle = document.getElementById('notificationToggle');
+                if (toggle) {
+                    const savedState = localStorage.getItem('statusStar_notifications');
+                    if (savedState === 'enabled') {
+                        toggle.classList.add('active');
+                    }
+
+                    toggle.addEventListener('click', () => {
+                        playClick();
+                        toggle.classList.toggle('active');
+                        const state = toggle.classList.contains('active') ? 'enabled' : 'disabled';
+                        localStorage.setItem('statusStar_notifications', state);
+                        showToast(state === 'enabled' ? 'Notifications enabled!' : 'Notifications disabled.');
+                    });
+                }
+            }
+
+            // ─── FOOTER BOTTOM SHEETS ───
+            function openFooterSheet(title, content, isFeedback = false, isContact = false, isChannel = false) {
+                const overlay = document.createElement('div');
+                overlay.className = 'menu-overlay visible';
+                overlay.style.zIndex = '400';
+
+                const sheet = document.createElement('div');
+                sheet.className = 'menu-sheet footer-sheet';
+                sheet.style.maxHeight = '80vh';
+
+                let html = `
+                    <div class="menu-handle"></div>
+                    <div class="menu-header">
+                        <div class="menu-title footer-sheet-title">✦ ${title}</div>
+                    </div>
+                    <div class="menu-list" style="padding:0 16px 16px;overflow-y:auto;">
+                `;
+
+                if (isChannel) {
+                    // For WhatsApp/Telegram channel links
+                    const channelType = title.toLowerCase().includes('whatsapp') ? 'whatsapp' : 'telegram';
+                    const channelLink = CHANNELS[channelType];
+                    html += `
+                        <div style="margin-bottom:8px;color:var(--modal-hint);font-size:14px;line-height:1.6;">
+                            ${content}
+                        </div>
+                        <div style="margin-bottom:12px;color:var(--modal-hint);font-size:13px;opacity:0.7;">
+                            Join our community and connect with other Status Star users worldwide.
+                        </div>
+                        <button id="joinChannelBtn" class="btn-action primary-action" style="width:100%;padding:14px;border:none;border-radius:14px;background:var(--green);color:#FFFFFF;font-size:16px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all 0.15s ease;">
+                            <span class="icon-btn">✦</span> Join ${title}
+                        </button>
+                    `;
+                } else if (isFeedback) {
+                    html += `
+                        <div style="margin-bottom:4px;color:var(--modal-hint);font-size:14px;line-height:1.5;">
+                            ${content}
+                        </div>
+                        <div style="margin-bottom:12px;color:var(--modal-hint);font-size:13px;opacity:0.7;">
+                            Your feedback helps us improve Status Star for everyone.
+                        </div>
+                        <div style="margin-bottom:12px;">
+                            <label style="font-size:14px;font-weight:500;color:var(--modal-label);display:block;margin-bottom:6px;">
+                                What can we do better? <span style="color:var(--red);">*</span>
+                            </label>
+                            <textarea id="feedbackMessage" rows="4" style="width:100%;padding:12px;border-radius:12px;border:0.5px solid var(--modal-input-border);background:var(--modal-input-bg);color:var(--modal-input-text);font-family:var(--font-body);font-size:14px;resize:vertical;outline:none;" placeholder="Share your suggestions, complaints, or ideas..."></textarea>
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <label style="font-size:14px;font-weight:500;color:var(--modal-label);display:block;margin-bottom:6px;">
+                                Your Email <span style="color:var(--modal-hint);font-weight:400;">(optional)</span>
+                            </label>
+                            <input type="email" id="feedbackEmail" style="width:100%;padding:12px;border-radius:12px;border:0.5px solid var(--modal-input-border);background:var(--modal-input-bg);color:var(--modal-input-text);font-family:var(--font-body);font-size:14px;outline:none;" placeholder="email@example.com" />
+                            <div style="font-size:11px;color:var(--modal-hint);margin-top:4px;">We'll only use this to follow up on your feedback.</div>
+                        </div>
+                        <button id="submitFeedback" class="btn-action primary-action" style="width:100%;padding:14px;border:none;border-radius:14px;background:var(--green);color:#FFFFFF;font-size:16px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all 0.15s ease;">
+                            <span class="icon-btn">✦</span> Submit Feedback
+                        </button>
+                        <div id="feedbackSuccess" style="display:none;margin-top:12px;padding:12px;background:var(--green)20;border-radius:12px;text-align:center;color:var(--green);font-weight:500;">
+                            ✓ Thank you for your feedback!
+                        </div>
+                    `;
+                } else if (isContact) {
+                    html += `
+                        <div style="margin-bottom:4px;color:var(--modal-hint);font-size:14px;line-height:1.5;">
+                            ${content}
+                        </div>
+                        <div style="margin-bottom:12px;color:var(--modal-hint);font-size:13px;opacity:0.7;">
+                            We'll respond within 24 hours.
+                        </div>
+                        <div style="margin-bottom:12px;">
+                            <label style="font-size:14px;font-weight:500;color:var(--modal-label);display:block;margin-bottom:6px;">
+                                Subject <span style="color:var(--red);">*</span>
+                            </label>
+                            <input type="text" id="contactSubject" style="width:100%;padding:12px;border-radius:12px;border:0.5px solid var(--modal-input-border);background:var(--modal-input-bg);color:var(--modal-input-text);font-family:var(--font-body);font-size:14px;outline:none;" placeholder="What is this about?" />
+                        </div>
+                        <div style="margin-bottom:12px;">
+                            <label style="font-size:14px;font-weight:500;color:var(--modal-label);display:block;margin-bottom:6px;">
+                                Message <span style="color:var(--red);">*</span>
+                            </label>
+                            <textarea id="contactMessage" rows="4" style="width:100%;padding:12px;border-radius:12px;border:0.5px solid var(--modal-input-border);background:var(--modal-input-bg);color:var(--modal-input-text);font-family:var(--font-body);font-size:14px;resize:vertical;outline:none;" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <label style="font-size:14px;font-weight:500;color:var(--modal-label);display:block;margin-bottom:6px;">
+                                Your Email <span style="color:var(--red);">*</span>
+                            </label>
+                            <input type="email" id="contactEmail" style="width:100%;padding:12px;border-radius:12px;border:0.5px solid var(--modal-input-border);background:var(--modal-input-bg);color:var(--modal-input-text);font-family:var(--font-body);font-size:14px;outline:none;" placeholder="email@example.com" />
+                            <div style="font-size:11px;color:var(--modal-hint);margin-top:4px;">We need your email to respond to you.</div>
+                        </div>
+                        <button id="submitContact" class="btn-action primary-action" style="width:100%;padding:14px;border:none;border-radius:14px;background:var(--blue);color:#FFFFFF;font-size:16px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all 0.15s ease;">
+                            <span class="icon-btn">✦</span> Send Message
+                        </button>
+                        <div id="contactSuccess" style="display:none;margin-top:12px;padding:12px;background:var(--blue)20;border-radius:12px;text-align:center;color:var(--blue);font-weight:500;">
+                            ✓ Message sent! We'll get back to you soon.
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div style="padding:8px 4px;color:var(--modal-hint);font-size:14px;line-height:1.6;">
+                            ${content}
+                        </div>
+                    `;
+                }
+
+                html += `
+                    </div>
+                    <div class="menu-footer">
+                        <button class="btn-close-menu" id="closeFooterSheet">Close</button>
+                    </div>
+                `;
+
+                sheet.innerHTML = html;
+                overlay.appendChild(sheet);
+                document.body.appendChild(overlay);
+
+                lockScroll();
+
+                sheet.querySelector('#closeFooterSheet').addEventListener('click', () => {
+                    overlay.remove();
+                    unlockScroll();
+                    playClick();
+                });
+
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        overlay.remove();
+                        unlockScroll();
+                    }
+                });
+
+                // Handle Join Channel button
+                if (isChannel) {
+                    const joinBtn = sheet.querySelector('#joinChannelBtn');
+                    if (joinBtn) {
+                        const channelType = title.toLowerCase().includes('whatsapp') ? 'whatsapp' : 'telegram';
+                        joinBtn.addEventListener('click', () => {
+                            window.open(CHANNELS[channelType], '_blank');
+                            playClick();
+                            setTimeout(() => {
+                                overlay.remove();
+                                unlockScroll();
+                            }, 500);
+                        });
+                    }
+                }
+
+                if (isFeedback) {
+                    const submitBtn = sheet.querySelector('#submitFeedback');
+                    const messageInput = sheet.querySelector('#feedbackMessage');
+                    const emailInput = sheet.querySelector('#feedbackEmail');
+                    const successDiv = sheet.querySelector('#feedbackSuccess');
+
+                    submitBtn.addEventListener('click', async () => {
+                        const message = messageInput.value.trim();
+                        if (!message) {
+                            showToast('Please enter your feedback');
+                            messageInput.focus();
+                            return;
+                        }
+
+                        submitBtn.textContent = 'Submitting...';
+                        submitBtn.disabled = true;
+
+                        try {
+                            const result = await submitFeedback(message, emailInput.value.trim());
+                            if (result.success) {
+                                successDiv.style.display = 'block';
+                                submitBtn.style.display = 'none';
+                                messageInput.disabled = true;
+                                emailInput.disabled = true;
+                                showToast('Feedback submitted successfully!');
+                                playSuccess();
+                                setTimeout(() => {
+                                    overlay.remove();
+                                    unlockScroll();
+                                }, 2000);
+                            } else {
+                                submitBtn.textContent = 'Try Again';
+                                submitBtn.disabled = false;
+                                showToast(result.error || 'Something went wrong');
+                            }
+                        } catch (error) {
+                            submitBtn.textContent = 'Try Again';
+                            submitBtn.disabled = false;
+                            showToast(error.message || 'Something went wrong');
+                        }
+                    });
+                }
+
+                if (isContact) {
+                    const submitBtn = sheet.querySelector('#submitContact');
+                    const subjectInput = sheet.querySelector('#contactSubject');
+                    const messageInput = sheet.querySelector('#contactMessage');
+                    const emailInput = sheet.querySelector('#contactEmail');
+                    const successDiv = sheet.querySelector('#contactSuccess');
+
+                    submitBtn.addEventListener('click', async () => {
+                        const subject = subjectInput.value.trim();
+                        const message = messageInput.value.trim();
+                        const email = emailInput.value.trim();
+
+                        if (!subject) {
+                            showToast('Please enter a subject');
+                            subjectInput.focus();
+                            return;
+                        }
+                        if (!message) {
+                            showToast('Please enter your message');
+                            messageInput.focus();
+                            return;
+                        }
+                        if (!email) {
+                            showToast('Please enter your email');
+                            emailInput.focus();
+                            return;
+                        }
+                        if (!email.includes('@') || !email.includes('.')) {
+                            showToast('Please enter a valid email');
+                            emailInput.focus();
+                            return;
+                        }
+
+                        submitBtn.textContent = 'Sending...';
+                        submitBtn.disabled = true;
+
+                        try {
+                            const result = await submitContact(subject, message, email);
+                            if (result.success) {
+                                successDiv.style.display = 'block';
+                                submitBtn.style.display = 'none';
+                                subjectInput.disabled = true;
+                                messageInput.disabled = true;
+                                emailInput.disabled = true;
+                                showToast('Message sent successfully!');
+                                playSuccess();
+                                setTimeout(() => {
+                                    overlay.remove();
+                                    unlockScroll();
+                                }, 2000);
+                            } else {
+                                submitBtn.textContent = 'Try Again';
+                                submitBtn.disabled = false;
+                                showToast(result.error || 'Something went wrong');
+                            }
+                        } catch (error) {
+                            submitBtn.textContent = 'Try Again';
+                            submitBtn.disabled = false;
+                            showToast(error.message || 'Something went wrong');
+                        }
+                    });
+                }
+            }
+
+            // ─── FULL LEGAL DOCUMENTS ───
+            const legalContent = {
+                footerPrivacy: `Your privacy is important to us. This Privacy Policy explains how Status Star collects, uses, and protects your information.
+
+                Information We Collect:
+                • Phone Number: To include you in the Contacts File
+                • Device ID: To prevent abuse and rate limiting
+                • Country Code: To auto-detect your location
+                • Browser Information: To optimize your experience
+                • Email (optional): To respond to your feedback or inquiry
+
+                Information We DO NOT Collect:
+                • Your name
+                • Your address
+                • Your payment information
+                • Your social media accounts
+                • Your browsing history
+                • Your precise location
+
+                How We Use Your Information:
+                • Create the Contacts File
+                • Check your status
+                • Prevent abuse with rate limiting
+                • Analyze usage patterns
+                • Respond to your feedback
+
+                Data Storage:
+                • Phone numbers: Until deletion request
+                • Device IDs: 30 days
+                • Feedback: Indefinite (for service improvement)
+                • Rate Limits: 30 days
+
+                Your Rights:
+                • Access your data
+                • Correct inaccurate data
+                • Request deletion of your data
+                • Withdraw consent at any time
+
+                To exercise your rights, use the Feedback or Contact Us form.
+
+                We never share your data with third parties. All data is encrypted and stored securely.`,
+                footerTerms: `Status Star - Terms of Use
+
+                By using Status Star, you agree to these Terms of Use.
+
+                Description of Service:
+                Status Star is a free tool that helps users get more WhatsApp and Telegram status viewers by creating a shared Contacts File (VCF).
+
+                User Conduct:
+                You agree to use Status Star only for lawful purposes. You may not:
+                • Submit fake or invalid phone numbers
+                • Bypass rate limits or security measures
+                • Use bots or scripts to automate interactions
+                • Submit offensive or harassing content
+                • Impersonate another person or entity
+
+                Rate Limits:
+                • Check Number: 5 checks per day with 5-minute cooldown
+                • Add Number: 2 adds per day with 5-minute cooldown
+                • Submit Feedback: 3 submissions per day
+                • Contact Us: 2 messages per day
+
+                Intellectual Property:
+                Status Star and all content, features, and functionality are owned by 8913 LLC. You retain ownership of your phone number and feedback.
+
+                Disclaimer:
+                Status Star is provided "as is" without any warranties. We do not guarantee that you will get more status viewers.
+
+                Limitation of Liability:
+                To the fullest extent permitted by law, 8913 LLC's total liability shall not exceed $0.00 USD.
+
+                Termination:
+                We may terminate your access for violations of these Terms.
+
+                Governing Law:
+                These Terms shall be governed by the laws of the jurisdiction where 8913 LLC is registered.
+
+                Contact:
+                Use the Feedback or Contact Us form for any questions.`,
+                footerCookies: `Cookie Policy
+
+                Status Star uses minimal cookies with a privacy-first approach.
+
+                What Cookies We Use:
+                1. Country Preference Cookie (statusStar_country)
+                   • Purpose: Remember your selected country
+                   • Duration: Persistent (until you clear browser data)
+
+                2. Last Used Number Cookie (statusStar_numbers)
+                   • Purpose: Auto-fill your phone number
+                   • Duration: Persistent (until you clear browser data)
+
+                3. Rate Limiting Cookies (statusStar_rate_*)
+                   • Purpose: Prevent abuse by tracking actions
+                   • Duration: 30 days (auto-cleaned)
+
+                What We DO NOT Use:
+                • Tracking cookies
+                • Analytics cookies (we use server-side analytics)
+                • Advertising cookies
+                • Third-party cookies
+                • Social media cookies
+                • Session cookies (all our cookies are persistent)
+
+                Your Control:
+                You can manage cookies through your browser settings. You can block all cookies or specific types.
+
+                Effect of Disabling Cookies:
+                • Country selection: Must select each time
+                • Last used number: Must type each time
+                • Rate limiting: May be less effective
+
+                We are committed to protecting your privacy and using cookies responsibly.`,
+                footerDisclaimer: `Disclaimer
+
+                Status Star is provided "as is" and "as available" without any warranties of any kind.
+
+                No Guarantees:
+                • We do not guarantee you will get more status viewers
+                • We do not guarantee the Contacts File will be accurate
+                • We do not guarantee uninterrupted service
+                • We do not guarantee the Service will be error-free
+                • We do not guarantee your data will never be compromised
+
+                Service Availability:
+                We strive to maintain 99.9% uptime but do not guarantee uninterrupted service.
+
+                User Responsibility:
+                • Your use of Status Star is at your own risk
+                • You are responsible for backing up your data
+                • You are responsible for protecting your device
+                • You are responsible for maintaining your privacy
+
+                Third-Party Content:
+                Status Star may contain links to third-party websites (WhatsApp, Telegram). We do not endorse or control third-party content.
+
+                Limitation of Liability:
+                To the fullest extent permitted by law, 8913 LLC's total liability shall not exceed $0.00 USD.
+
+                No Warranty of Results:
+                Individual results may vary based on your location, network, activity, and device.
+
+                By using Status Star, you acknowledge that you use the Service at your own risk and accept the limitations of liability.`,
+                footerFeedback: 'Share your feedback, suggestions, or complaints. We read every message and use your input to improve Status Star for everyone.',
+                footerContact: 'Have a question about Status Star? We\'re here to help. Whether it\'s a technical issue, feature request, or general inquiry, we\'ll respond within 24 hours.',
+                footerAbout: 'Status Star is a free tool designed to help you get more WhatsApp and Telegram status viewers. Join thousands of users who boost their visibility daily!',
+                footerWhatsApp: 'Join our WhatsApp community to stay updated with the latest Status Star news, tips, and announcements. Connect with other users and get exclusive updates!',
+                footerTelegram: 'Join our Telegram community to connect with other Status Star users worldwide. Get real-time updates, tips, and be part of the growing community!'
+            };
+
+            Object.keys(legalContent).forEach(id => {
+                document.getElementById(id).addEventListener('click', (e) => {
+                    e.preventDefault();
+                    playClick();
+
+                    const isFeedback = id === 'footerFeedback';
+                    const isContact = id === 'footerContact';
+                    const isChannel = id === 'footerWhatsApp' || id === 'footerTelegram';
+                    const title = id.replace('footer', '').replace(/([A-Z])/g, ' $1').trim();
+
+                    if (isChannel) {
+                        openFooterSheet(title, legalContent[id], false, false, true);
+                    } else if (isFeedback) {
+                        openFooterSheet(title, legalContent[id], true, false, false);
+                    } else if (isContact) {
+                        openFooterSheet(title, legalContent[id], false, true, false);
+                    } else {
+                        openFooterSheet(title, legalContent[id], false, false, false);
+                    }
+                });
+            });
+
+            // ─── AUTO-DETECT COUNTRY ───
+            function autoDetectCountry() {
+                const lang = navigator.language || navigator.languages?.[0] || 'en';
+                const countryCode = lang.split('-')[1] || lang.split('_')[1] || '';
+
+                if (countryCode) {
+                    const found = countries.find(c => c.code === countryCode.toUpperCase());
+                    if (found) {
+                        updateCountryUI(found);
+                        return;
+                    }
+                }
+
+                try {
+                    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                    const tzMap = {
+                        'Africa/Dar_es_Salaam': 'TZ',
+                        'Africa/Nairobi': 'KE',
+                        'Africa/Kampala': 'UG',
+                        'Africa/Lagos': 'NG',
+                        'Africa/Johannesburg': 'ZA',
+                        'Africa/Cairo': 'EG',
+                        'America/New_York': 'US',
+                        'America/Los_Angeles': 'US',
+                        'America/Chicago': 'US',
+                        'America/Toronto': 'CA',
+                        'Europe/London': 'GB',
+                        'Europe/Paris': 'FR',
+                        'Europe/Berlin': 'DE',
+                        'Europe/Madrid': 'ES',
+                        'Europe/Rome': 'IT',
+                        'Europe/Amsterdam': 'NL',
+                        'Asia/Dubai': 'AE',
+                        'Asia/Kolkata': 'IN',
+                        'Asia/Singapore': 'SG',
+                        'Asia/Tokyo': 'JP',
+                        'Australia/Sydney': 'AU',
+                        'Pacific/Auckland': 'NZ'
+                    };
+                    const code = tzMap[tz];
+                    if (code) {
+                        const found = countries.find(c => c.code === code);
+                        if (found) {
+                            updateCountryUI(found);
+                            return;
+                        }
+                    }
+                } catch {}
+
+                const defaultCountry = countries.find(c => c.code === 'TZ') || countries[0];
+                if (defaultCountry) {
+                    updateCountryUI(defaultCountry);
+                }
+            }
+
+            // ─── INIT ───
+            document.getElementById('footerCopyright').textContent =
+                `© ${new Date().getFullYear()} Status Star. All rights reserved.`;
+
+            autoDetectCountry();
+            updateTimeDisplays();
+            updateLiveCount();
+            initCookieBanner();
+
+            setTimeout(() => {
+                hideSplash();
+            }, 6000);
+
+            setTimeout(() => {
+                if (!splashScreen.classList.contains('hidden')) {
+                    hideSplash();
+                }
+            }, 8000);
+
+            setTimeout(() => {
+                showToast('✦ Enter your number to check your status', 2800);
+            }, 6500);
+
+            // ─── KEYBOARD ACCESSIBILITY ───
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (countryModal.classList.contains('visible')) closeCountryModalFunc();
+                    if (verifyModal.classList.contains('visible')) closeVerifyModal();
+                    if (menuOverlay.classList.contains('visible')) {
+                        menuOverlay.classList.remove('visible');
+                        unlockScroll();
+                    }
+                    document.querySelectorAll('.menu-overlay.visible').forEach(el => {
+                        if (el.id !== 'menuOverlay' && el.id !== 'countryModal' && el.id !== 'verifyModal') {
+                            el.remove();
+                            unlockScroll();
+                        }
+                    });
+                    if (cookieBanner.classList.contains('visible')) {
+                        // Don't close cookie banner with escape
+                    }
+                }
+            });
+
+            // ─── PREFERS-REDUCED-MOTION ───
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (prefersReducedMotion.matches) {
+                document.querySelectorAll('.splash-screen .splash-brand, .splash-screen .splash-subtitle, .splash-screen .splash-loader .loader-star')
+                    .forEach(el => {
+                        el.style.animation = 'none';
+                    });
+                document.querySelector('.splash-screen .splash-loader .loader-circle-progress')
+                    .style.animation = 'none';
+                document.querySelector('.splash-screen .splash-loader .loader-circle-progress')
+                    .style.strokeDashoffset = '0';
+            }
+
+            console.log('✦ Status Star v1.0 — Production Ready');
+            console.log('🌍 Auto-detected country: ' + currentCountry.name);
+            console.log('🔒 Rate limiting is server-side (Supabase Edge Functions)');
+            console.log('🆔 Device ID: ' + deviceId);
+            console.log('📱 WhatsApp Channel: https://whatsapp.com/channel/0029Vb8G9SoFy72EY63h4p1U');
+            console.log('📱 Telegram Channel: https://t.me/status_star_worldwide');
+
+        })();
+    </script>
+
+    <!-- ─── SUPABASE SDK ─── -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
+</body>
+</html>
