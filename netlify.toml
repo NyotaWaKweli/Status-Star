@@ -1,0 +1,15 @@
+[build]
+  publish = "."
+  command = "echo 'No build step required'"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[functions."scheduled-vcf"]
+  schedule = "0 0 * * *"  # Runs daily at midnight UTC (EAT is UTC+3)
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
